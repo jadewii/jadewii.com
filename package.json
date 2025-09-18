@@ -1,0 +1,36 @@
+{
+  "name": "music-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.891.0",
+    "@aws-sdk/s3-request-presigner": "^3.891.0",
+    "@stripe/stripe-js": "^7.9.0",
+    "@tailwindcss/postcss": "^4.1.13",
+    "autoprefixer": "^10.4.21",
+    "jsonwebtoken": "^9.0.2",
+    "next": "^15.5.3",
+    "postcss": "^8.5.6",
+    "postcss-preset-env": "^10.3.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-hot-toast": "^2.6.0",
+    "resend": "^6.1.0",
+    "stripe": "^18.5.0",
+    "tailwindcss": "^4.1.13",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10"
+  }
+}
