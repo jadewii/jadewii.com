@@ -1,275 +1,164 @@
-import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
-import { products } from '../../../lib/data/products';
 
-const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
+// --- ENV you must set ---
+const AWS_REGION = process.env.AWS_REGION;
+const S3_BUCKET = process.env.S3_BUCKET;
+const DOWNLOAD_JWT_SECRET = process.env.DOWNLOAD_JWT_SECRET;
+
+// Map Stripe Price IDs -> which private ZIP(s) to deliver
+// Fill this with your real price IDs and S3 keys
+const PRODUCT_MAP = {
+  // Example mappings - replace with real Stripe price IDs
+  // Albums
+  'price_honey': ['albums/honey.zip'],
+  'price_wabi_sabi': ['albums/wabi-sabi.zip'],
+  'price_white_lotus': ['albums/white-lotus.zip'],
+  'price_common_side_effects': ['albums/common-side-effects.zip'],
+  'price_artificially_unfavored': ['albums/artificially-unfavored.zip'],
+  'price_a_bit_of_red_in_the_blue': ['albums/a-bit-of-red-in-the-blue.zip'],
+  'price_battle_of_wolves': ['albums/battle-of-wolves.zip'],
+  'price_charlies_doomed_christmas': ['albums/charlies-doomed-christmas.zip'],
+  'price_dan_da_damned': ['albums/dan-da-damned.zip'],
+  'price_drone_sightings': ['albums/drone-sightings.zip'],
+  'price_enlightened_ape': ['albums/enlightened-ape.zip'],
+  'price_how_the_grinch_chilled_christmas': ['albums/how-the-grinch-chilled-christmas.zip'],
+  'price_kame_house_session_one': ['albums/kame-house-session-one.zip'],
+
+  // Drum Kits
+  'price_boombap_drumbreaks_vol1': ['packs/boombap-drumbreaks-vol-1.zip'],
+
+  // Add more mappings as you create Stripe products
+};
+
+const s3 = new S3Client({
+  region: AWS_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
+  // For Backblaze B2 compatibility
+  endpoint: process.env.AWS_ENDPOINT,
 });
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const token = searchParams.get('token');
-
-  if (!token) {
-    return new Response(createErrorPage('No token provided'), {
-      status: 400,
-      headers: { 'Content-Type': 'text/html' },
-    });
-  }
-
   try {
-    // Verify JWT
-    const decoded = jwt.verify(token, process.env.DOWNLOAD_JWT_SECRET);
+    const { searchParams } = new URL(request.url);
+    const token = searchParams.get('token') || '';
 
-    // Find products matching the price IDs
-    const purchasedProducts = products.filter(product =>
-      decoded.priceIds.includes(product.stripePriceId)
-    );
+    const payload = jwt.verify(token, DOWNLOAD_JWT_SECRET);
 
-    if (purchasedProducts.length === 0) {
-      return new Response(createErrorPage('No downloads found for your purchase'), {
-        status: 404,
-        headers: { 'Content-Type': 'text/html' },
-      });
+    // collect S3 object keys for all purchased items
+    const keys = new Set();
+    for (const priceId of payload.priceIds) {
+      (PRODUCT_MAP[priceId] || []).forEach((k) => keys.add(k));
     }
 
-    // Generate pre-signed URLs (24 hours)
-    const downloads = await Promise.all(
-      purchasedProducts.map(async (product) => {
-        if (!product.downloadFile) {
-          return null;
-        }
+    if (!keys.size) {
+      return new Response('No files found for this purchase.', { status: 404 });
+    }
 
-        const command = new GetObjectCommand({
-          Bucket: process.env.S3_BUCKET,
-          Key: product.downloadFile,
-        });
-
-        const url = await getSignedUrl(s3Client, command, { expiresIn: 86400 }); // 24 hours
-
-        return {
-          title: product.title,
-          filename: `${product.title}.zip`,
-          url
-        };
+    // Generate 24h pre-signed URLs
+    const urls = await Promise.all(
+      [...keys].map(async (Key) => {
+        const url = await getSignedUrl(
+          s3,
+          new GetObjectCommand({ Bucket: S3_BUCKET, Key }),
+          { expiresIn: 60 * 60 * 24 } // 24 hours
+        );
+        return { name: Key.split('/').pop() || Key, url };
       })
     );
 
-    const validDownloads = downloads.filter(Boolean);
-
-    // Return download page
-    return new Response(createDownloadPage(decoded.email, validDownloads), {
-      headers: { 'Content-Type': 'text/html' },
-    });
-
-  } catch (error) {
-    console.error('Token verification error:', error);
-
-    if (error.name === 'TokenExpiredError') {
-      return new Response(createErrorPage('Your download link has expired'), {
-        status: 401,
-        headers: { 'Content-Type': 'text/html' },
-      });
-    }
-
-    if (error.name === 'JsonWebTokenError') {
-      return new Response(createErrorPage('Invalid download link'), {
-        status: 401,
-        headers: { 'Content-Type': 'text/html' },
-      });
-    }
-
-    return new Response(createErrorPage('Something went wrong. Please contact support.'), {
-      status: 500,
-      headers: { 'Content-Type': 'text/html' },
-    });
-  }
-}
-
-function createDownloadPage(email, downloads) {
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Your Downloads - JAde Wii</title>
-      <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-          background: #0a0a0a;
-          color: #fff;
-          min-height: 100vh;
-          padding: 40px 20px;
-        }
-
-        .container {
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        h1 {
-          font-size: 2.5rem;
-          margin-bottom: 10px;
-          font-weight: 300;
-        }
-
-        .email {
-          color: #666;
-          margin-bottom: 30px;
-        }
-
-        .info {
-          background: #111;
-          padding: 20px;
-          border-radius: 8px;
-          margin-bottom: 30px;
-          border-left: 4px solid #4CAF50;
-        }
-
-        .downloads {
-          display: flex;
-          flex-direction: column;
-          gap: 15px;
-        }
-
-        .download-link {
-          display: flex;
-          align-items: center;
-          padding: 20px;
-          background: #111;
-          border-radius: 8px;
-          text-decoration: none;
-          color: #fff;
-          transition: background 0.2s;
-        }
-
-        .download-link:hover {
-          background: #222;
-        }
-
-        .download-icon {
-          margin-right: 15px;
-          font-size: 1.5rem;
-        }
-
-        .download-title {
-          flex: 1;
-          font-size: 1.1rem;
-        }
-
-        .warning {
-          margin-top: 30px;
-          padding: 15px;
-          background: #332200;
-          border-radius: 8px;
-          border: 1px solid #554400;
-          font-size: 0.9rem;
-          color: #ffcc00;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
+    // Clean HTML response matching site style
+    const html = `
+      <!doctype html>
+      <html>
+      <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <title>Your Downloads - JAde Wii</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Arial;
+            background: white;
+            padding: 40px 20px;
+            max-width: 720px;
+            margin: 0 auto;
+          }
+          h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+          }
+          .file {
+            margin: 15px 0;
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          .file strong {
+            font-size: 1.1rem;
+          }
+          .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+          }
+          .btn:hover {
+            opacity: 0.8;
+          }
+          .info {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-left: 4px solid #666;
+          }
+          .info p {
+            color: #666;
+            line-height: 1.6;
+          }
+        </style>
+      </head>
+      <body>
         <h1>Your Downloads</h1>
-        <div class="email">For: ${email}</div>
-
+        ${urls.map(u => `
+          <div class="file">
+            <strong>${u.name}</strong>
+            <a class="btn" href="${u.url}" download>Download</a>
+          </div>
+        `).join('')}
         <div class="info">
-          <p>✓ Your download links are ready!</p>
-          <p style="margin-top: 10px; color: #999;">These links will expire in 24 hours.</p>
+          <p>Links expire in 24 hours. You can re-open the email any time to generate fresh download links.</p>
+          <p style="margin-top: 10px;">Having issues? Reply to your purchase email for support.</p>
         </div>
+      </body>
+      </html>
+    `;
 
-        <div class="downloads">
-          ${downloads.map(d => `
-            <a href="${d.url}" class="download-link" download>
-              <span class="download-icon">🎵</span>
-              <span class="download-title">${d.title}</span>
-            </a>
-          `).join('')}
-        </div>
+    return new Response(html, {
+      headers: { 'Content-Type': 'text/html; charset=utf-8' }
+    });
 
-        <div class="warning">
-          ⚠️ Important: Save these files to your device. The download links will expire in 24 hours.
-        </div>
-      </div>
-    </body>
-    </html>
-  `;
-}
-
-function createErrorPage(message) {
-  return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Error - JAde Wii</title>
-      <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-          background: #0a0a0a;
-          color: #fff;
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-        }
-
-        .container {
-          text-align: center;
-          max-width: 500px;
-        }
-
-        h1 {
-          font-size: 2rem;
-          margin-bottom: 20px;
-          color: #ff4444;
-        }
-
-        p {
-          font-size: 1.1rem;
-          color: #ccc;
-          margin-bottom: 30px;
-        }
-
-        .home-link {
-          display: inline-block;
-          padding: 12px 30px;
-          background: #fff;
-          color: #000;
-          text-decoration: none;
-          border-radius: 4px;
-          font-weight: 600;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>Error</h1>
-        <p>${message}</p>
-        <a href="/" class="home-link">Back to Shop</a>
-      </div>
-    </body>
-    </html>
-  `;
+  } catch (e) {
+    return new Response(
+      'Link invalid or expired. Reply to your purchase email to get a fresh link.',
+      { status: 401 }
+    );
+  }
 }

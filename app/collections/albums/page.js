@@ -61,7 +61,7 @@ export default function AlbumsPage() {
       {singles.length > 0 && (
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6 uppercase tracking-wide">Singles</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {sortedSingles.map((single) => (
               <ProductCard key={single.id} product={single} />
             ))}
@@ -73,7 +73,7 @@ export default function AlbumsPage() {
       {mixtapes.length > 0 && (
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6 uppercase tracking-wide">Mix Tapes</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {mixtapes.map((mixtape) => (
               <ProductCard key={mixtape.id} product={mixtape} />
             ))}
@@ -85,7 +85,7 @@ export default function AlbumsPage() {
       {modular.length > 0 && (
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6 uppercase tracking-wide">Modular</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {modular.map((mod) => (
               <ProductCard key={mod.id} product={mod} />
             ))}
@@ -97,7 +97,7 @@ export default function AlbumsPage() {
       {electronic.length > 0 && (
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6 uppercase tracking-wide">Electronic</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {electronic.map((elec) => (
               <ProductCard key={elec.id} product={elec} />
             ))}
@@ -109,7 +109,7 @@ export default function AlbumsPage() {
       {lofi.length > 0 && (
         <div className="mb-12">
           <h2 className="text-xl font-bold mb-6 uppercase tracking-wide">LoFi</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {lofi.map((lo) => (
               <ProductCard key={lo.id} product={lo} />
             ))}

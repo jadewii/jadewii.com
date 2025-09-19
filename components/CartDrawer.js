@@ -50,7 +50,17 @@ export default function CartDrawer() {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b">
-            <h2 className="text-sm font-bold">YOUR CART</h2>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCartOpen(false)}
+                className="hover:opacity-70"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              <h2 className="text-sm font-bold">YOUR CART</h2>
+            </div>
             <button
               onClick={() => setCartOpen(!isCartOpen)}
               className="text-xl hover:opacity-70"

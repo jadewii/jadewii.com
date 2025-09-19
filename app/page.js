@@ -16,7 +16,7 @@ export default function HomePage() {
       {mixtapes.length > 0 && (
         <>
           <h2 className="text-xl font-bold mb-6">MIXTAPES</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {mixtapes.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -28,7 +28,7 @@ export default function HomePage() {
       {modular.length > 0 && (
         <>
           <h2 className="text-xl font-bold mb-6">MODULAR</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {modular.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -40,7 +40,7 @@ export default function HomePage() {
       {electronic.length > 0 && (
         <>
           <h2 className="text-xl font-bold mb-6">ELECTRONIC</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {electronic.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -52,7 +52,7 @@ export default function HomePage() {
       {lofi.length > 0 && (
         <>
           <h2 className="text-xl font-bold mb-6">LOFI</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {lofi.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

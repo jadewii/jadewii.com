@@ -13,8 +13,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.891.0",
-    "@aws-sdk/s3-request-presigner": "^3.891.0",
+    "@aws-sdk/client-s3": "^3.892.0",
+    "@aws-sdk/s3-request-presigner": "^3.892.0",
     "@stripe/stripe-js": "^7.9.0",
     "@tailwindcss/postcss": "^4.1.13",
     "autoprefixer": "^10.4.21",

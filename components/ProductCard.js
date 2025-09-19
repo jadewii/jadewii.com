@@ -100,6 +100,13 @@ export default function ProductCard({ product, products, currentIndex }) {
     e.preventDefault()
     e.stopPropagation()
 
+    // If product has a payment link, redirect to Stripe
+    if (product.paymentLink) {
+      window.location.href = product.paymentLink
+      return
+    }
+
+    // Otherwise use the cart system (for bulk purchases)
     // Show checkmark briefly
     setShowCheckmark(true)
     setTimeout(() => setShowCheckmark(false), 500)
@@ -109,6 +116,10 @@ export default function ProductCard({ product, products, currentIndex }) {
       ...product,
       selectedFormat: 'mp3_320'
     })
+
+    // Open cart when item is added
+    const { setCartOpen } = useCartStore.getState()
+    setCartOpen(true)
   }
 
   // Handle audio playback and track display
