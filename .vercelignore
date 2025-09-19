@@ -1,0 +1,14 @@
+node_modules
+.git
+.next
+public/audio/
+public/downloads/
+album-zips/
+private/
+scripts/
+*.mp3
+*.wav
+*.aif
+*.aiff
+*.flac
+*.m4a

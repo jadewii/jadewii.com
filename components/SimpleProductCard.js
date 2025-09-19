@@ -9,6 +9,8 @@ export default function SimpleProductCard({ product }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
+  const [leftButtonPressed, setLeftButtonPressed] = useState(false)
+  const [rightButtonPressed, setRightButtonPressed] = useState(false)
   const audioRef = useRef(null)
 
   // Get track list
@@ -17,11 +19,11 @@ export default function SimpleProductCard({ product }) {
     : ['Preview']
 
   const getAudioSrc = () => {
-    // Use GitHub Pages for production, local for dev
-    const baseUrl = process.env.NODE_ENV === 'production'
-      ? 'https://jadewii.github.io/jadewiiwebsiteaudio'
-      : '/audio'
-    return `${baseUrl}/${product.id}.mp3`
+    // Always use GitHub Pages for audio since we removed local audio files
+    const baseUrl = 'https://jadewii.github.io/jadewiiwebsiteaudio'
+    const audioUrl = `${baseUrl}/${product.id}.mp3`
+    console.log('Audio URL for', product.title, ':', audioUrl)
+    return audioUrl
   }
 
   const handlePlayPause = (e) => {
@@ -39,8 +41,28 @@ export default function SimpleProductCard({ product }) {
           currentlyPlaying.dispatchEvent(new Event('force-stop'))
         }
 
-        audioRef.current.currentTime = currentTrackIndex * 10
-        audioRef.current.play()
+        // Load and play the audio
+        audioRef.current.load()
+
+        const playPromise = audioRef.current.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Audio started successfully
+              audioRef.current.currentTime = currentTrackIndex * 10
+            })
+            .catch(err => {
+              console.error('Play failed:', err)
+              console.error('Audio src:', audioRef.current.src)
+              // Show user-friendly error
+              if (err.name === 'NotAllowedError') {
+                alert('Please click play again. Browser requires user interaction for audio playback.')
+              } else {
+                alert(`Audio error: ${err.message}`)
+              }
+            })
+        }
+
         currentlyPlaying = audioRef.current
       }
       setIsPlaying(!isPlaying)
@@ -121,21 +143,81 @@ export default function SimpleProductCard({ product }) {
       onMouseLeave={() => setShowControls(false)}
     >
       {/* Album Cover */}
-      <div className="aspect-square relative overflow-hidden bg-gray-100">
-        <img
-          src={product.image || '/placeholder.jpg'}
-          alt={product.title}
-          className="w-full h-full object-cover"
-        />
+      <div className="aspect-square relative overflow-hidden bg-gray-100" style={{ perspective: '1200px' }}>
+        {/* Vinyl flip container */}
+        <div
+          className="absolute inset-0"
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: showControls && product.hoverImage ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+          }}
+        >
+          {/* Side A */}
+          <img
+            src={product.image || '/placeholder.jpg'}
+            alt={product.title}
+            className="w-full h-full object-cover absolute inset-0"
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(0deg)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+            }}
+          />
+
+          {/* Side B */}
+          {product.hoverImage && (
+            <img
+              src={product.hoverImage}
+              alt={`${product.title} - Side B`}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                backfaceVisibility: 'hidden',
+                transform: 'rotateY(180deg)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+              }}
+            />
+          )}
+        </div>
+
 
         {/* Hover Controls */}
         {showControls && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Previous Track Button - Circle with Arrow */}
+            {tracks.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setLeftButtonPressed(true)
+                  setTimeout(() => setLeftButtonPressed(false), 200)
+                  const newIndex = currentTrackIndex === 0 ? tracks.length - 1 : currentTrackIndex - 1
+                  setCurrentTrackIndex(newIndex)
+                  if (isPlaying && audioRef.current) {
+                    audioRef.current.currentTime = newIndex * 10
+                  }
+                }}
+                className="mr-6"
+                style={{
+                  filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.8))',
+                  transform: leftButtonPressed ? 'scale(1.5)' : 'scale(1)',
+                  transition: 'transform 0.2s'
+                }}
+              >
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="white">
+                  <path d="M14 7l-5 5 5 5V7z"/>
+                </svg>
+              </button>
+            )}
+
+            {/* Play/Pause Button */}
             <button
               onClick={handlePlayPause}
-              className="text-white hover:scale-110 transition-transform"
+              className="hover:scale-110 transition-transform"
+              style={{ filter: 'drop-shadow(0 2px 12px rgba(0,0,0,0.9))' }}
             >
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="white">
                 {isPlaying ? (
                   <>
                     <rect x="6" y="4" width="4" height="16" />
@@ -146,6 +228,33 @@ export default function SimpleProductCard({ product }) {
                 )}
               </svg>
             </button>
+
+            {/* Next Track Button - Circle with Arrow */}
+            {tracks.length > 1 && (
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setRightButtonPressed(true)
+                  setTimeout(() => setRightButtonPressed(false), 200)
+                  const newIndex = (currentTrackIndex + 1) % tracks.length
+                  setCurrentTrackIndex(newIndex)
+                  if (isPlaying && audioRef.current) {
+                    audioRef.current.currentTime = newIndex * 10
+                  }
+                }}
+                className="ml-6"
+                style={{
+                  filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.8))',
+                  transform: rightButtonPressed ? 'scale(1.5)' : 'scale(1)',
+                  transition: 'transform 0.2s'
+                }}
+              >
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="white">
+                  <path d="M10 17l5-5-5-5v10z"/>
+                </svg>
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -165,7 +274,7 @@ export default function SimpleProductCard({ product }) {
       </div>
 
       {/* Hidden Audio Element */}
-      <audio ref={audioRef} src={getAudioSrc()} preload="metadata" crossOrigin="anonymous" />
+      <audio ref={audioRef} src={getAudioSrc()} preload="none" />
     </div>
   )
 }

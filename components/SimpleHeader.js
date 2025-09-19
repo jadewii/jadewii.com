@@ -4,17 +4,17 @@ import Link from 'next/link'
 
 export default function SimpleHeader() {
   return (
-    <header className="fixed top-0 left-0 right-0 bg-black z-50">
+    <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
       <div className="container-custom py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="text-xl font-bold">
             JAde Wii
           </Link>
           <div className="flex items-center space-x-6">
-            <Link href="/collections/albums" className="hover:text-gray-300">
+            <Link href="/collections/albums" className="hover:text-gray-600">
               ALBUMS
             </Link>
-            <Link href="/collections/sample-packs" className="hover:text-gray-300">
+            <Link href="/collections/sample-packs" className="hover:text-gray-600">
               SAMPLE PACKS
             </Link>
           </div>

@@ -1,92 +1,172 @@
-# Stripe Setup Guide for JAde Wii Music Store
+# Setting Up Stripe Payment Links for JAde Wii Music Store
 
-## Prerequisites
-- Stripe account (https://dashboard.stripe.com)
-- AWS S3 account for file hosting
-- Resend account for email delivery (https://resend.com)
+## Quick Setup - Using Payment Links (Simplest Method!)
 
-## Step 1: Create Album ZIP Files
-Run the script to create ZIP files for all your albums:
-```bash
-./scripts/create-album-zips.sh
-```
-This will create ZIPs in `/Users/jade/music-store/album-zips/`
+Payment Links are the easiest way - no webhooks, no API keys needed for basic sales!
 
-## Step 2: Upload to S3
-1. Create an S3 bucket (e.g., `jadewii-music-downloads`)
-2. Upload all ZIP files maintaining the folder structure:
-   - singles/
-   - mixtapes/
-   - modular/
-   - electronic/
+### Step 1: Go to Stripe Dashboard
+Log into: https://dashboard.stripe.com/payment-links
 
-## Step 3: Create Stripe Products
-For each album in Stripe Dashboard:
+### Step 2: Create Your First Payment Link
 
-1. Go to Products → Add Product
+1. Click **"Create payment link"**
 2. Fill in:
-   - Name: Album title (e.g., "Honey")
-   - Description: Album description
-   - Price: Set your price (e.g., $10.00)
-   - Currency: USD
-   - Payment type: One-time
+   - **Product name**: Charlie's DOOMED Christmas
+   - **Description**: Digital Album by JAde Wii
+   - **Price**: $10.00
+   - **Quantity**: Customer can't adjust quantity
 
-3. After creating, copy the Price ID (starts with `price_`)
+3. Under **"After payment"**:
+   - ✅ Don't show confirmation page
+   - ✅ Collect customer emails
+   - Add success URL: `https://jadewii.com/thank-you`
 
-## Step 4: Update products.js
-Update each product with:
+4. Click **"Create link"**
+5. Copy the payment link (looks like: `https://buy.stripe.com/...`)
+
+### Step 3: Speed Up - Use Duplicate!
+
+After creating your first Payment Link:
+1. Click the "..." menu → **Duplicate**
+2. Just change the product name
+3. Save and copy the new link
+4. Repeat for all albums
+
+### Step 4: Update Your products.js
+
+Open `/Users/jade/music-store/lib/data/products.js` and add Payment Links:
+
 ```javascript
-stripePriceId: 'price_YOUR_ACTUAL_ID',
-downloadFile: 'mixtapes/Honey.zip' // S3 path
+{
+  id: 'charlies-doomed-christmas',
+  title: 'Charlie\'s DOOMED Christmas',
+  stripePaymentLink: 'https://buy.stripe.com/YOUR_ACTUAL_LINK_HERE',  // ← Add your link here
+  // ... rest of product data
+}
 ```
 
-## Step 5: Configure Environment Variables
-Create/update `.env.local`:
+## All Your Albums to Create Links For:
+
+### MIXTAPES ($10 each)
 ```
-# Stripe
-STRIPE_SECRET_KEY=sk_test_YOUR_KEY
-STRIPE_PUBLISHABLE_KEY=pk_test_YOUR_KEY
-STRIPE_WEBHOOK_SECRET=whsec_YOUR_SECRET
-
-# AWS S3
-AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=YOUR_KEY
-AWS_SECRET_ACCESS_KEY=YOUR_SECRET
-S3_BUCKET=jadewii-music-downloads
-
-# Email (Resend)
-RESEND_API_KEY=re_YOUR_KEY
-EMAIL_FROM=JAde Wii <noreply@your-domain.com>
-
-# Site
-SITE_URL=https://your-domain.com
-
-# Security
-DOWNLOAD_JWT_SECRET=YOUR_RANDOM_SECRET_KEY
+☐ Charlie's DOOMED Christmas
+☐ Common Side Effects
+☐ Dan Da Damned
+☐ Drone Sightings
+☐ Honey
+☐ How The Grinch Chilled Christmas
+☐ Rudolf The LOFI Reindeer
+☐ Tiny Tape Vol. 1
+☐ White Lotus
 ```
 
-## Step 6: Set Up Stripe Webhook
-1. In Stripe Dashboard → Developers → Webhooks
-2. Add endpoint: `https://your-domain.com/api/webhook`
-3. Select event: `checkout.session.completed`
-4. Copy the signing secret to `STRIPE_WEBHOOK_SECRET`
+### MODULAR ($10 each)
+```
+☐ A Bit of Red in the Blue
+☐ Above The Quadi
+☐ Artificially Unfavored
+☐ Behind the Sun
+☐ Beneath the Bohdi
+☐ Between the Redwood
+☐ Birds of Paradise
+☐ Blobs
+☐ Celestial Kunzite
+☐ Cosmos
+☐ Creatures of the Sea
+☐ Curious Pez
+☐ Demodex
+☐ Eidos
+☐ Elder Of Agraban
+☐ Enlightened Ape
+☐ Euro & Chill
+☐ Fish Out of Water
+☐ Gem In Eye
+☐ Kolossos
+☐ Lady of Lords
+☐ Melting Waters
+☐ Mountains of Shidoh
+☐ Organic Parts
+☐ Pollinated Memories
+☐ Remedies Granted Through Dreams
+☐ Sacred Spaces
+☐ Saturnian Moons
+☐ Shaman's Quest
+☐ Shrine of Elderon
+☐ Shrooms of Discovery
+☐ Silver Servant
+☐ Space Dali
+☐ Strange Worlds
+☐ Through the Graph
+☐ Tidal Dialogues
+☐ Translucent Dreams
+☐ Twisted Strings
+☐ Unimpressed
+☐ Wabi Sabi
+☐ Wilderness Watts
+```
 
-## Step 7: Test the Flow
-1. Use Stripe test mode
-2. Test card: 4242 4242 4242 4242
-3. Any future expiry and CVC
+### ELECTRONIC ($10 each)
+```
+☐ Acid Waves (Remaster)
+☐ Aphids
+☐ End in Mind (Remaster)
+☐ Error Code
+☐ Lone Manta (Remaster)
+☐ Operation Love
+☐ Orca Vindicated (Remaster)
+☐ Penguin Aspirations (Remaster)
+☐ Tiny Overtures
+```
 
-## Monitoring
-- Check Stripe Dashboard for payments
-- Monitor webhook events in Stripe
-- Check server logs for email delivery
+### LOFI ($10 each)
+```
+☐ Confessions of a Samurai
+☐ Geisha Dreams
+☐ Habit Garden
+☐ Milk District
+☐ Propagated Mind
+☐ Stealin' Dreams
+```
 
-## Production Checklist
-- [ ] All album ZIPs uploaded to S3
-- [ ] All products created in Stripe
-- [ ] products.js updated with real Price IDs
-- [ ] Environment variables configured
-- [ ] Webhook endpoint configured
-- [ ] Email domain verified in Resend
-- [ ] SSL certificate active on domain
-- [ ] Switch to Stripe live mode keys
+### SAMPLE PACKS ($30)
+```
+☐ Boombap Drumbreaks Vol. 1 - $30
+```
+
+## Test Your Setup
+
+1. Click any "BUY +" button on your site
+2. Should redirect to Stripe checkout
+3. Use test card: `4242 4242 4242 4242`
+4. Check payment in Stripe Dashboard
+
+## Deploy Your Site
+
+Once Payment Links are added:
+```bash
+git add .
+git commit -m "Add Stripe Payment Links"
+git push
+```
+
+Then deploy to Vercel/Netlify - should work now without API issues!
+
+## Handling Digital Downloads
+
+For now, Payment Links will just process payment. For digital delivery, you can:
+
+**Option 1: Manual Delivery (Easiest to start)**
+- Check Stripe Dashboard for new orders
+- Email files manually to customers
+
+**Option 2: Use Gumroad or SendOwl (Automated)**
+- These services handle both payment AND file delivery
+- More expensive but fully automated
+
+**Option 3: Add Automation Later**
+- Start with Payment Links
+- Add webhook + file delivery later when ready
+
+## That's it! 🎉
+
+Payment Links are the simplest way to start selling. No complex setup needed!
