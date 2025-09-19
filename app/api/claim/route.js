@@ -2,11 +2,6 @@ import jwt from 'jsonwebtoken';
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-// --- ENV you must set ---
-const AWS_REGION = process.env.AWS_REGION;
-const S3_BUCKET = process.env.S3_BUCKET;
-const DOWNLOAD_JWT_SECRET = process.env.DOWNLOAD_JWT_SECRET;
-
 // Map Stripe Price IDs -> which private ZIP(s) to deliver
 // Fill this with your real price IDs and S3 keys
 const PRODUCT_MAP = {
@@ -32,23 +27,12 @@ const PRODUCT_MAP = {
   // Add more mappings as you create Stripe products
 };
 
-const s3 = (AWS_REGION && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY)
-  ? new S3Client({
-      region: AWS_REGION,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      },
-      // For Backblaze B2 compatibility
-      endpoint: process.env.AWS_ENDPOINT,
-    })
-  : null;
-
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const token = searchParams.get('token') || '';
 
+    const DOWNLOAD_JWT_SECRET = process.env.DOWNLOAD_JWT_SECRET || 'fallback-secret-for-build';
     const payload = jwt.verify(token, DOWNLOAD_JWT_SECRET);
 
     // collect S3 object keys for all purchased items
@@ -60,6 +44,52 @@ export async function GET(request) {
     if (!keys.size) {
       return new Response('No files found for this purchase.', { status: 404 });
     }
+
+    // Only initialize S3 if we have credentials
+    const AWS_REGION = process.env.AWS_REGION;
+    const S3_BUCKET = process.env.S3_BUCKET;
+
+    if (!AWS_REGION || !S3_BUCKET || !process.env.AWS_ACCESS_KEY_ID) {
+      // Return a simple response if S3 is not configured
+      return new Response(`
+        <!doctype html>
+        <html>
+        <head>
+          <meta name="viewport" content="width=device-width,initial-scale=1"/>
+          <title>Downloads Pending - JAde Wii</title>
+          <style>
+            body {
+              font-family: system-ui, -apple-system, 'Segoe UI', Arial;
+              background: white;
+              padding: 40px 20px;
+              max-width: 720px;
+              margin: 0 auto;
+            }
+            h1 { font-size: 2.5rem; margin-bottom: 30px; font-weight: 300; }
+            .info { padding: 20px; background: #f0f0f0; border-left: 4px solid #666; }
+          </style>
+        </head>
+        <body>
+          <h1>Downloads Pending Setup</h1>
+          <div class="info">
+            <p>Your purchase was successful! Download links will be available once file storage is configured.</p>
+            <p>Please contact support if you don't receive your files within 24 hours.</p>
+          </div>
+        </body>
+        </html>
+      `, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
+    }
+
+    const s3 = new S3Client({
+      region: AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      },
+      endpoint: process.env.AWS_ENDPOINT,
+    });
 
     // Generate 24h pre-signed URLs
     const urls = await Promise.all(
