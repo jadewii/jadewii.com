@@ -32,15 +32,17 @@ const PRODUCT_MAP = {
   // Add more mappings as you create Stripe products
 };
 
-const s3 = new S3Client({
-  region: AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-  // For Backblaze B2 compatibility
-  endpoint: process.env.AWS_ENDPOINT,
-});
+const s3 = (AWS_REGION && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY)
+  ? new S3Client({
+      region: AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      },
+      // For Backblaze B2 compatibility
+      endpoint: process.env.AWS_ENDPOINT,
+    })
+  : null;
 
 export async function GET(request) {
   try {

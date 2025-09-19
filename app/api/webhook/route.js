@@ -10,8 +10,8 @@ const SITE_URL = process.env.SITE_URL;
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const EMAIL_FROM = process.env.EMAIL_FROM; // e.g. 'JAde Wii <downloads@yourdomain.com>'
 
-const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' });
-const resend = new Resend(RESEND_API_KEY);
+const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2024-06-20' }) : null;
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 export async function POST(request) {
   // Get raw body for Stripe signature verification
