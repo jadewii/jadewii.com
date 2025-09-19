@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import ProductCard from '../components/ProductCard'
+import SimpleProductCard from '../components/SimpleProductCard'
 import { products } from '../lib/data/products'
 
 export default function HomePage() {
@@ -18,7 +18,7 @@ export default function HomePage() {
           <h2 className="text-xl font-bold mb-6">MIXTAPES</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {mixtapes.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <SimpleProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
@@ -30,7 +30,7 @@ export default function HomePage() {
           <h2 className="text-xl font-bold mb-6">MODULAR</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {modular.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <SimpleProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
@@ -42,7 +42,7 @@ export default function HomePage() {
           <h2 className="text-xl font-bold mb-6">ELECTRONIC</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {electronic.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <SimpleProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
@@ -54,7 +54,7 @@ export default function HomePage() {
           <h2 className="text-xl font-bold mb-6">LOFI</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
             {lofi.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <SimpleProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
