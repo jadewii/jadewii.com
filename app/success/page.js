@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useCartStore } from '../../store/cart'
+import { useCartStore } from '../../lib/store'
 
 export default function SuccessPage() {
   const searchParams = useSearchParams()
