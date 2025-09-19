@@ -1,8 +1,9 @@
-import Stripe from 'stripe';
-import jwt from 'jsonwebtoken';
-import { Resend } from 'resend';
-
 export async function POST(request) {
+  // Dynamic imports to avoid build-time initialization
+  const Stripe = (await import('stripe')).default;
+  const jwt = (await import('jsonwebtoken')).default;
+  const { Resend } = await import('resend');
+
   // Initialize services only when needed at runtime
   const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
   const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
