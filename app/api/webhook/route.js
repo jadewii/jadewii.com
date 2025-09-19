@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 import jwt from 'jsonwebtoken';
 import { Resend } from 'resend';
 
+// Build fix: Handle missing env vars during build time
 // --- ENV you must set ---
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
