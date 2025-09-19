@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server'
-import Stripe from 'stripe'
 import { products } from '../../../lib/data/products'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
 export async function GET(request) {
+  // Dynamic import to avoid build-time initialization
+  const Stripe = (await import('stripe')).default;
+  const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY) : null;
+
+  if (!stripe) {
+    return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 })
+  }
   try {
     const { searchParams } = new URL(request.url)
     const sessionId = searchParams.get('session_id')
