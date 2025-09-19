@@ -17,8 +17,11 @@ export default function SimpleProductCard({ product }) {
     : ['Preview']
 
   const getAudioSrc = () => {
-    if (product.previewUrl) return product.previewUrl
-    return `/audio/${product.id}.mp3`
+    // Use GitHub Pages for production, local for dev
+    const baseUrl = process.env.NODE_ENV === 'production'
+      ? 'https://jadewii.github.io/jadewiiwebsiteaudio'
+      : '/audio'
+    return `${baseUrl}/${product.id}.mp3`
   }
 
   const handlePlayPause = (e) => {
@@ -45,14 +48,33 @@ export default function SimpleProductCard({ product }) {
   }
 
   // Simple direct purchase - no cart!
-  const handleBuyNow = (e) => {
+  const handleBuyNow = async (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (product.stripePaymentLink && product.stripePaymentLink !== 'https://buy.stripe.com/YOUR_LINK_HERE') {
-      window.location.href = product.stripePaymentLink
-    } else {
-      alert(`Payment link coming soon for "${product.title}"`)
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: product.id,
+          title: product.title,
+          price: product.price,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        console.error('No checkout URL received')
+      }
+    } catch (error) {
+      console.error('Checkout error:', error)
+      alert('Something went wrong. Please try again.')
     }
   }
 
@@ -128,32 +150,22 @@ export default function SimpleProductCard({ product }) {
         )}
       </div>
 
-      {/* Product Info */}
+      {/* Buy Button Bar - Below Album Art */}
+      <button
+        onClick={handleBuyNow}
+        className="w-full py-2 text-xs font-semibold bg-gray-100 text-black hover:bg-gray-200 transition-colors"
+      >
+        BUY +
+      </button>
+
+      {/* Album Info */}
       <div className="mt-2">
         <h3 className="text-sm font-medium truncate">{product.title}</h3>
-        <p className="text-xs text-gray-600 truncate">{product.artist}</p>
-
-        {/* Track Display */}
-        {isPlaying && (
-          <p className="text-xs text-gray-500 mt-1 truncate">
-            ▶ {tracks[currentTrackIndex]}
-          </p>
-        )}
-
-        {/* Price and Buy Button */}
-        <div className="flex items-center justify-between mt-2">
-          <span className="text-sm font-bold">${product.price}</span>
-          <button
-            onClick={handleBuyNow}
-            className="px-3 py-1 bg-black text-white text-xs hover:bg-gray-800 transition-colors"
-          >
-            BUY
-          </button>
-        </div>
+        <p className="text-sm font-bold mt-1">${product.price.toFixed(2)}</p>
       </div>
 
       {/* Hidden Audio Element */}
-      <audio ref={audioRef} src={getAudioSrc()} preload="metadata" />
+      <audio ref={audioRef} src={getAudioSrc()} preload="metadata" crossOrigin="anonymous" />
     </div>
   )
 }
