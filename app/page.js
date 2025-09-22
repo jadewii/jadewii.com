@@ -2,16 +2,30 @@
 
 import { useState, useEffect } from 'react'
 import SimpleProductCard from '../components/SimpleProductCard'
+import FeaturedRelease from '../components/FeaturedRelease'
 import { products } from '../lib/data/products'
 
 export default function HomePage() {
-  const mixtapes = products.filter(p => p.category === 'mixtapes')
+  const featuredRelease = products.find(p => p.id === 'dan-da-damned')
+  const mixtapes = products.filter(p => p.category === 'mixtapes' && p.id !== 'dan-da-damned')
   const modular = products.filter(p => p.category === 'modular')
   const electronic = products.filter(p => p.category === 'electronic')
   const lofi = products.filter(p => p.category === 'lofi')
 
   return (
-    <div className="container-custom py-8">
+    <div>
+      {/* Featured Release Section */}
+      {featuredRelease && <FeaturedRelease product={featuredRelease} />}
+
+      <div className="container-custom py-8">
+        {/* Digital Vinyl Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">DIGITAL VINYL EDITION</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Complete album downloads featuring lossless .WAVs and high-res album artwork.
+            Support independent artists directly.
+          </p>
+        </div>
       {/* MIXTAPES Section - FIRST */}
       {mixtapes.length > 0 && (
         <>
@@ -59,6 +73,7 @@ export default function HomePage() {
           </div>
         </>
       )}
+      </div>
     </div>
   )
 }
