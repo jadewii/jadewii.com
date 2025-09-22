@@ -1,0 +1,267 @@
+/* JAde Wii - Professional Music Store Theme for Itch.io */
+
+/* === BASE STYLES === */
+body, .wrapper {
+  background: #000 !important;
+  color: #fff !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+}
+
+/* Remove default red theme */
+.button, .buy_btn, .button.buy_btn {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 10px 20px !important;
+  transition: all 0.3s ease !important;
+}
+
+.button:hover, .buy_btn:hover {
+  background: #fff !important;
+  color: #000 !important;
+  transform: scale(1.05);
+}
+
+/* === HEADER CUSTOMIZATION === */
+.header {
+  background: #000 !important;
+  border-bottom: 1px solid #222 !important;
+}
+
+.header h1, .header h2 {
+  color: #fff !important;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Profile section */
+.user_header {
+  background: linear-gradient(180deg, #1a1a1a 0%, #000 100%) !important;
+  border-bottom: 1px solid #333;
+}
+
+/* === GAME/ALBUM GRID === */
+.game_grid_widget {
+  background: transparent !important;
+}
+
+.game_cell {
+  background: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+  transition: all 0.3s ease !important;
+  border-radius: 0 !important;
+}
+
+.game_cell:hover {
+  border-color: #333 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255,255,255,0.1) !important;
+}
+
+/* Album/Game thumbnails */
+.game_thumb {
+  border-radius: 0 !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.game_thumb img {
+  transition: transform 0.5s ease !important;
+}
+
+.game_cell:hover .game_thumb img {
+  transform: scale(1.1);
+}
+
+/* Game/Album title */
+.game_title {
+  color: #fff !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  font-size: 11px !important;
+  letter-spacing: 1px;
+  margin-top: 10px !important;
+}
+
+.game_author {
+  color: #666 !important;
+  font-size: 10px !important;
+}
+
+/* Price tags */
+.price_tag {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border: 1px solid #333 !important;
+  font-weight: 600 !important;
+  padding: 4px 8px !important;
+  border-radius: 0 !important;
+}
+
+/* === INDIVIDUAL PRODUCT PAGE === */
+.game_info_panel {
+  background: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+  border-radius: 0 !important;
+}
+
+.info_panel_widget {
+  background: #000 !important;
+  border: none !important;
+}
+
+/* Purchase section */
+.purchase_panel {
+  background: #0a0a0a !important;
+  border: 1px solid #222 !important;
+  border-radius: 0 !important;
+  padding: 20px !important;
+}
+
+.buy_row {
+  background: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  padding: 15px !important;
+  border-radius: 0 !important;
+}
+
+/* Download button */
+.download_btn {
+  background: #fff !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px 30px !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.download_btn:hover {
+  background: #f0f0f0 !important;
+  transform: scale(1.05);
+}
+
+/* === DESCRIPTION AREA === */
+.formatted_description {
+  background: #0a0a0a !important;
+  padding: 30px !important;
+  border: 1px solid #1a1a1a !important;
+  color: #ccc !important;
+  line-height: 1.8 !important;
+}
+
+.formatted_description h1,
+.formatted_description h2,
+.formatted_description h3 {
+  color: #fff !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 30px 0 15px 0 !important;
+}
+
+/* === COMMENTS SECTION === */
+.community_post {
+  background: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+  border-radius: 0 !important;
+}
+
+.community_post:hover {
+  background: #111 !important;
+}
+
+.post_author {
+  color: #fff !important;
+}
+
+.post_body {
+  color: #ccc !important;
+}
+
+/* === FOOTER === */
+.footer {
+  background: #000 !important;
+  border-top: 1px solid #222 !important;
+  color: #666 !important;
+}
+
+.footer a {
+  color: #999 !important;
+}
+
+/* === AUDIO PLAYER STYLING === */
+.audio_player {
+  background: #0a0a0a !important;
+  border: 1px solid #222 !important;
+  padding: 10px !important;
+  border-radius: 0 !important;
+}
+
+/* === RESPONSIVE IMPROVEMENTS === */
+@media (max-width: 768px) {
+  .game_cell {
+    margin-bottom: 20px;
+  }
+
+  .game_title {
+    font-size: 12px !important;
+  }
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.game_cell {
+  animation: fadeIn 0.5s ease;
+}
+
+/* === REMOVE ITCH.IO BRANDING (Premium only) === */
+.itchio_footer_widgets {
+  display: none !important;
+}
+
+/* === CUSTOM SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* === BADGES AND TAGS === */
+.game_tags {
+  margin-top: 10px;
+}
+
+.game_tag {
+  background: #1a1a1a !important;
+  color: #999 !important;
+  border: 1px solid #333 !important;
+  padding: 3px 8px !important;
+  font-size: 10px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 5px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.game_tag:hover {
+  background: #333 !important;
+  color: #fff !important;
+}

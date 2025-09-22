@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   images: {
-    domains: ['f4.bcbits.com', 'bandcamp.com', 'localhost'],
+    unoptimized: true,
   },
   // Skip API route checks during build
   typescript: {
@@ -9,12 +10,6 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  // Experimental: disable static page generation for API routes
-  experimental: {
-    outputFileTracingIncludes: {
-      '/api/*': [],
-    },
   },
 }
 

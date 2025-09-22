@@ -8,6 +8,7 @@ let currentlyPlaying = null
 export default function SimpleProductCard({ product }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [leftButtonPressed, setLeftButtonPressed] = useState(false)
   const [rightButtonPressed, setRightButtonPressed] = useState(false)
@@ -69,34 +70,19 @@ export default function SimpleProductCard({ product }) {
     }
   }
 
-  // Simple direct purchase - no cart!
+  // Simple direct purchase - link to Itch.io!
   const handleBuyNow = async (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId: product.id,
-          title: product.title,
-          price: product.price,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (data.url) {
-        window.location.href = data.url
-      } else {
-        console.error('No checkout URL received')
-      }
-    } catch (error) {
-      console.error('Checkout error:', error)
-      alert('Something went wrong. Please try again.')
+    // If we have an Itch.io link, use it
+    if (product.itchioUrl) {
+      window.open(product.itchioUrl, '_blank')
+    } else if (product.stripePaymentLink) {
+      // Fall back to Stripe if configured
+      window.location.href = product.stripePaymentLink
+    } else {
+      alert('Purchase link coming soon!')
     }
   }
 
@@ -139,47 +125,38 @@ export default function SimpleProductCard({ product }) {
   return (
     <div
       className="relative group cursor-pointer"
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
+      onMouseEnter={() => {
+        setShowControls(true)
+        setIsHovered(true)
+      }}
+      onMouseLeave={() => {
+        setShowControls(false)
+        setIsHovered(false)
+      }}
     >
       {/* Album Cover */}
-      <div className="aspect-square relative overflow-hidden bg-gray-100" style={{ perspective: '1200px' }}>
-        {/* Vinyl flip container */}
-        <div
-          className="absolute inset-0"
+      <div className="aspect-square relative overflow-hidden bg-gray-100">
+        {/* Main image */}
+        <img
+          src={product.image || '/placeholder.jpg'}
+          alt={product.title}
+          className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300"
           style={{
-            transformStyle: 'preserve-3d',
-            transform: showControls && product.hoverImage ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+            opacity: isHovered && product.hoverImage ? 0 : 1
           }}
-        >
-          {/* Side A */}
+        />
+
+        {/* Hover image */}
+        {product.hoverImage && (
           <img
-            src={product.image || '/placeholder.jpg'}
-            alt={product.title}
-            className="w-full h-full object-cover absolute inset-0"
+            src={product.hoverImage}
+            alt={`${product.title} - Back`}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
             style={{
-              backfaceVisibility: 'hidden',
-              transform: 'rotateY(0deg)',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
+              opacity: isHovered ? 1 : 0
             }}
           />
-
-          {/* Side B */}
-          {product.hoverImage && (
-            <img
-              src={product.hoverImage}
-              alt={`${product.title} - Side B`}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{
-                backfaceVisibility: 'hidden',
-                transform: 'rotateY(180deg)',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.2)'
-              }}
-            />
-          )}
-        </div>
-
+        )}
 
         {/* Hover Controls */}
         {showControls && (
@@ -262,7 +239,7 @@ export default function SimpleProductCard({ product }) {
       {/* Buy Button Bar - Below Album Art */}
       <button
         onClick={handleBuyNow}
-        className="w-full py-2 text-xs font-semibold bg-gray-100 text-black hover:bg-gray-200 transition-colors"
+        className="w-full py-2 text-xs font-semibold bg-gray-100 text-black hover:bg-gray-800 hover:text-white transition-colors"
       >
         BUY +
       </button>
