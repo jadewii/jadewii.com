@@ -63,10 +63,72 @@ export default function FeaturedRelease({ product }) {
   }
 
   const handleTrackSelect = (trackIndex) => {
-    setCurrentTrackIndex(trackIndex)
-    if (audioRef.current && duration > 0) {
-      const trackStartTime = trackIndex * (duration / tracks.length)
-      audioRef.current.currentTime = trackStartTime
+    if (currentTrackIndex === trackIndex && isPlaying) {
+      // If clicking the same track that's playing, pause it
+      audioRef.current.pause()
+      setIsPlaying(false)
+      currentlyPlaying = null
+    } else {
+      // Stop any currently playing audio
+      if (audioRef.current && isPlaying) {
+        audioRef.current.pause()
+      }
+
+      // Stop other players
+      if (currentlyPlaying && currentlyPlaying !== audioRef.current) {
+        currentlyPlaying.pause()
+        currentlyPlaying.dispatchEvent(new Event('force-stop'))
+      }
+
+      // Update track index
+      setCurrentTrackIndex(trackIndex)
+
+      // Set the audio position to the correct track
+      if (audioRef.current && duration > 0) {
+        const trackStartTime = trackIndex * (duration / tracks.length)
+        audioRef.current.currentTime = trackStartTime
+
+        // Start playing after setting the position
+        const playPromise = audioRef.current.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true)
+              currentlyPlaying = audioRef.current
+            })
+            .catch(err => {
+              console.error('Play failed:', err)
+              if (err.name === 'NotAllowedError') {
+                alert('Please click play again. Browser requires user interaction for audio playback.')
+              } else {
+                alert(`Audio error: ${err.message}`)
+              }
+            })
+        }
+      } else {
+        // If duration not available yet, just start playing
+        const playPromise = audioRef.current.play()
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true)
+              currentlyPlaying = audioRef.current
+              // Set position after play starts
+              if (duration > 0) {
+                const trackStartTime = trackIndex * (duration / tracks.length)
+                audioRef.current.currentTime = trackStartTime
+              }
+            })
+            .catch(err => {
+              console.error('Play failed:', err)
+              if (err.name === 'NotAllowedError') {
+                alert('Please click play again. Browser requires user interaction for audio playback.')
+              } else {
+                alert(`Audio error: ${err.message}`)
+              }
+            })
+        }
+      }
     }
   }
 
@@ -135,17 +197,17 @@ export default function FeaturedRelease({ product }) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black text-white py-16 mb-16">
+    <div className="bg-white text-black py-8 mb-8 border-b border-gray-200">
       <div className="container-custom">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">LATEST RELEASE</h1>
-          <p className="text-xl text-gray-300">Experience the complete album before you buy</p>
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold mb-2">{product.title.toUpperCase()}</h2>
+          <p className="text-sm text-gray-600">Lossless .WAVs, complete with high-resolution A/B artwork.</p>
         </div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <div className="aspect-square relative overflow-hidden bg-gray-800 rounded-lg shadow-2xl">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="relative mx-auto">
+              <div className="aspect-square relative overflow-hidden bg-gray-100 rounded">
                 <img
                   src={product.image || '/placeholder.jpg'}
                   alt={product.title}
@@ -155,9 +217,9 @@ export default function FeaturedRelease({ product }) {
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
                     onClick={handlePlayPause}
-                    className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full p-6 hover:bg-opacity-30 transition-all duration-300"
+                    className="bg-white bg-opacity-90 backdrop-blur-sm rounded-full p-4 hover:bg-opacity-100 transition-all duration-300"
                   >
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="white">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="black">
                       {isPlaying ? (
                         <>
                           <rect x="6" y="4" width="4" height="16" />
@@ -171,23 +233,13 @@ export default function FeaturedRelease({ product }) {
                 </div>
               </div>
 
-              <div className="mt-6 text-center">
-                <h2 className="text-3xl font-bold mb-2">{product.title}</h2>
-                <p className="text-xl text-gray-300 mb-4">{product.artist}</p>
-                <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-6">Track List</h3>
-
-              <div className="bg-gray-800 rounded-lg p-4 mb-6">
-                <div className="flex items-center gap-4 mb-4">
+              <div className="bg-gray-100 rounded p-3 mt-4">
+                <div className="flex items-center gap-3 mb-3">
                   <button
                     onClick={handlePlayPause}
-                    className="bg-white text-black rounded-full p-3 hover:bg-gray-200 transition-colors"
+                    className="bg-black text-white rounded-full p-2 hover:bg-gray-800 transition-colors"
                   >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                       {isPlaying ? (
                         <>
                           <rect x="6" y="4" width="4" height="16" />
@@ -200,43 +252,87 @@ export default function FeaturedRelease({ product }) {
                   </button>
 
                   <div className="flex-1">
-                    <div className="text-sm font-medium mb-1">
+                    <div className="text-xs font-medium mb-1">
                       {tracks[currentTrackIndex] || 'Select a track'}
                     </div>
-                    <div className="text-xs text-gray-400">
-                      {formatTime(currentTime)} / {formatTime(duration)}
+                    <div className="text-xs text-gray-500">
+                      0:{String(Math.max(10 - Math.floor(currentTime % 10), 0)).padStart(2, '0')}
                     </div>
                   </div>
                 </div>
 
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-300 rounded-full h-1">
                   <div
-                    className="bg-white h-2 rounded-full transition-all duration-100"
-                    style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
+                    className="bg-black h-1 rounded-full transition-all duration-100"
+                    style={{ width: `${Math.min(((currentTime % 10) / 10) * 100, 100)}%` }}
                   ></div>
                 </div>
               </div>
+            </div>
 
-              <div className="space-y-2 mb-8">
+            <div className="h-full flex flex-col">
+              <div className="space-y-1 flex-1">
                 {tracks.map((track, index) => (
                   <button
                     key={index}
                     onClick={() => handleTrackSelect(index)}
-                    className={`w-full text-left p-3 rounded-lg transition-colors ${
+                    className={`w-full text-left p-3 text-xs rounded transition-colors ${
                       currentTrackIndex === index
-                        ? 'bg-white bg-opacity-20 text-white'
-                        : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
+                        ? 'bg-gray-200 text-black font-medium'
+                        : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-sm font-medium w-8">{index + 1}.</span>
-                      <span className="flex-1">{track}</span>
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 flex justify-center">
+                        {currentTrackIndex === index ? (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="black">
+                            {isPlaying ? (
+                              <>
+                                <rect x="6" y="4" width="4" height="16" />
+                                <rect x="14" y="4" width="4" height="16" />
+                              </>
+                            ) : (
+                              <polygon points="5 3 19 12 5 21 5 3" />
+                            )}
+                          </svg>
+                        ) : (
+                          <span className="text-xs font-medium">{index + 1}.</span>
+                        )}
+                      </div>
+                      <span className="flex-1 truncate">{track}</span>
                       {currentTrackIndex === index && isPlaying && (
-                        <div className="w-4 h-4">
-                          <div className="flex items-center gap-1">
-                            <div className="w-1 h-3 bg-white animate-pulse"></div>
-                            <div className="w-1 h-2 bg-white animate-pulse" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                        <div className="w-6 h-4">
+                          <div className="flex items-center gap-px justify-center">
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.6s',
+                              animationDelay: '0s'
+                            }}></div>
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.8s',
+                              animationDelay: '0.1s'
+                            }}></div>
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.5s',
+                              animationDelay: '0.2s'
+                            }}></div>
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.7s',
+                              animationDelay: '0.3s'
+                            }}></div>
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.6s',
+                              animationDelay: '0.4s'
+                            }}></div>
+                            <div className="w-0.5 bg-black animate-bounce" style={{
+                              height: `${Math.floor(Math.random() * 12) + 4}px`,
+                              animationDuration: '0.9s',
+                              animationDelay: '0.5s'
+                            }}></div>
                           </div>
                         </div>
                       )}
@@ -247,7 +343,7 @@ export default function FeaturedRelease({ product }) {
 
               <button
                 onClick={handleBuyNow}
-                className="w-full bg-white text-black font-bold py-4 px-8 text-lg rounded-lg hover:bg-gray-200 transition-colors"
+                className="w-full bg-black text-white font-bold py-2 px-4 text-sm rounded hover:bg-gray-800 transition-colors mt-4"
               >
                 BUY DIGITAL ALBUM - ${product.price.toFixed(2)}
               </button>

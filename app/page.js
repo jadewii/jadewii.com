@@ -20,10 +20,11 @@ export default function HomePage() {
       <div className="container-custom py-8">
         {/* Digital Vinyl Section */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">DIGITAL VINYL EDITION</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Digital albums, yours forever.
+          </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Complete album downloads featuring lossless .WAVs and high-res album artwork.
-            Support independent artists directly.
+            The absolute best way to support me as an independent artist.
           </p>
         </div>
       {/* MIXTAPES Section - FIRST */}

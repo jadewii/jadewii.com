@@ -138,25 +138,10 @@ export default function SimpleProductCard({ product }) {
       <div className="aspect-square relative overflow-hidden bg-gray-100">
         {/* Main image */}
         <img
-          src={product.image || '/placeholder.jpg'}
-          alt={product.title}
-          className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300"
-          style={{
-            opacity: isHovered && product.hoverImage ? 0 : 1
-          }}
+          src={isHovered && product.hoverImage ? product.hoverImage : (product.image || '/placeholder.jpg')}
+          alt={isHovered && product.hoverImage ? `${product.title} - Back` : product.title}
+          className="w-full h-full object-cover absolute inset-0"
         />
-
-        {/* Hover image */}
-        {product.hoverImage && (
-          <img
-            src={product.hoverImage}
-            alt={`${product.title} - Back`}
-            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
-            style={{
-              opacity: isHovered ? 1 : 0
-            }}
-          />
-        )}
 
         {/* Hover Controls */}
         {showControls && (
@@ -239,7 +224,11 @@ export default function SimpleProductCard({ product }) {
       {/* Buy Button Bar - Below Album Art */}
       <button
         onClick={handleBuyNow}
-        className="w-full py-2 text-xs font-semibold bg-gray-100 text-black hover:bg-gray-800 hover:text-white transition-colors"
+        className={`w-full py-2 text-xs font-semibold transition-colors ${
+          isHovered
+            ? 'bg-gray-800 text-white'
+            : 'bg-gray-100 text-black'
+        }`}
       >
         BUY +
       </button>

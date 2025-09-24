@@ -11,8 +11,14 @@ export default function SimpleHeader() {
             JAde Wii
           </Link>
           <div className="flex items-center space-x-6">
-            <Link href="/collections/albums" className="hover:text-gray-600">
+            <Link href="/" className="hover:text-gray-600">
               ALBUMS
+            </Link>
+            <Link href="/patches" className="hover:text-gray-600">
+              PATCHES
+            </Link>
+            <Link href="/gear" className="hover:text-gray-600">
+              GEAR
             </Link>
             <Link href="/collections/sample-packs" className="hover:text-gray-600">
               SAMPLE PACKS

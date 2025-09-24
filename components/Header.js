@@ -36,16 +36,10 @@ export default function Header() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/" className="hover:text-gray-400 transition-colors">
-              Home
+              Albums
             </Link>
-            <Link href="/collections/albums" className="hover:text-gray-400 transition-colors">
-              Digital Albums
-            </Link>
-            <Link href="/collections/sample-packs" className="hover:text-gray-400 transition-colors">
-              Drum & Sample Kits
-            </Link>
-            <Link href="/about" className="hover:text-gray-400 transition-colors">
-              About
+            <Link href="/gear" className="hover:text-gray-400 transition-colors">
+              Gear
             </Link>
           </div>
 
@@ -92,16 +86,10 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-gray-800">
             <div className="flex flex-col space-y-4">
               <Link href="/" className="hover:text-gray-400 transition-colors">
-                Home
+                Albums
               </Link>
-              <Link href="/collections/albums" className="hover:text-gray-400 transition-colors">
-                Digital Albums
-              </Link>
-              <Link href="/collections/sample-packs" className="hover:text-gray-400 transition-colors">
-                Drum & Sample Kits
-              </Link>
-              <Link href="/about" className="hover:text-gray-400 transition-colors">
-                About
+              <Link href="/gear" className="hover:text-gray-400 transition-colors">
+                Gear
               </Link>
             </div>
           </div>
