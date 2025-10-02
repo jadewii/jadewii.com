@@ -38,7 +38,7 @@ export default function Header() {
             <Link href="/" className="hover:text-gray-400 transition-colors">
               Home
             </Link>
-            <Link href="/collections/albums" className="hover:text-gray-400 transition-colors">
+            <Link href="/albums" className="hover:text-gray-400 transition-colors">
               Digital Albums
             </Link>
             <Link href="/collections/sample-packs" className="hover:text-gray-400 transition-colors">
