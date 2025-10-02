@@ -18,17 +18,6 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* MIXTAPES Section */}
-      {mixtapes.length > 0 && (
-        <>
-          <h2 className="text-xl font-bold mb-6">MIXTAPES</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
-            {mixtapes.map((product) => (
-              <SimpleProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </>
-      )}
 
       {/* MODULAR Section */}
       {modular.length > 0 && (
