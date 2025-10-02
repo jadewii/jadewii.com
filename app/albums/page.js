@@ -5,7 +5,7 @@ import SimpleProductCard from '../../components/SimpleProductCard'
 import { products } from '../../lib/data/products'
 
 export default function AlbumsPage() {
-  const albums = products.filter(p => p.type === 'album')
+  const albums = products.filter(p => p.type === 'album' && p.itchioUrl)
   const mixtapes = albums.filter(p => p.category === 'mixtapes')
   const modular = albums.filter(p => p.category === 'modular')
 
