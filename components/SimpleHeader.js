@@ -14,6 +14,9 @@ export default function SimpleHeader() {
             <Link href="/albums" className="hover:text-gray-600">
               ALBUMS
             </Link>
+            <Link href="/collections/sample-packs" className="hover:text-gray-600">
+              SAMPLE PACKS
+            </Link>
           </div>
         </nav>
       </div>
