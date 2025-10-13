@@ -135,17 +135,17 @@ export default function FeaturedRelease({ product }) {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black text-white py-16 mb-16">
+    <div className="bg-white text-black py-16 mb-16">
       <div className="container-custom">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">LATEST RELEASE</h1>
-          <p className="text-xl text-gray-300">Experience the complete album before you buy</p>
+          <p className="text-xl text-gray-600">Experience the complete album before you buy</p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="aspect-square relative overflow-hidden bg-gray-800 rounded-lg shadow-2xl">
+              <div className="aspect-square relative overflow-hidden bg-gray-100 rounded-lg shadow-lg">
                 <img
                   src={product.image || '/placeholder.jpg'}
                   alt={product.title}
@@ -155,9 +155,9 @@ export default function FeaturedRelease({ product }) {
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
                     onClick={handlePlayPause}
-                    className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full p-6 hover:bg-opacity-30 transition-all duration-300"
+                    className="bg-white bg-opacity-90 backdrop-blur-sm rounded-full p-6 hover:bg-opacity-100 transition-all duration-300"
                   >
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="white">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="black">
                       {isPlaying ? (
                         <>
                           <rect x="6" y="4" width="4" height="16" />
@@ -173,7 +173,7 @@ export default function FeaturedRelease({ product }) {
 
               <div className="mt-6 text-center">
                 <h2 className="text-3xl font-bold mb-2">{product.title}</h2>
-                <p className="text-xl text-gray-300 mb-4">{product.artist}</p>
+                <p className="text-xl text-gray-600 mb-4">{product.artist}</p>
                 <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
               </div>
             </div>
@@ -181,11 +181,11 @@ export default function FeaturedRelease({ product }) {
             <div>
               <h3 className="text-2xl font-bold mb-6">Track List</h3>
 
-              <div className="bg-gray-800 rounded-lg p-4 mb-6">
+              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-6">
                 <div className="flex items-center gap-4 mb-4">
                   <button
                     onClick={handlePlayPause}
-                    className="bg-white text-black rounded-full p-3 hover:bg-gray-200 transition-colors"
+                    className="bg-black text-white rounded-full p-3 hover:bg-gray-800 transition-colors"
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                       {isPlaying ? (
@@ -203,15 +203,15 @@ export default function FeaturedRelease({ product }) {
                     <div className="text-sm font-medium mb-1">
                       {tracks[currentTrackIndex] || 'Select a track'}
                     </div>
-                    <div className="text-xs text-gray-400">
+                    <div className="text-xs text-gray-600">
                       {formatTime(currentTime)} / {formatTime(duration)}
                     </div>
                   </div>
                 </div>
 
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-white h-2 rounded-full transition-all duration-100"
+                    className="bg-black h-2 rounded-full transition-all duration-100"
                     style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
                   ></div>
                 </div>
@@ -222,10 +222,10 @@ export default function FeaturedRelease({ product }) {
                   <button
                     key={index}
                     onClick={() => handleTrackSelect(index)}
-                    className={`w-full text-left p-3 rounded-lg transition-colors ${
+                    className={`w-full text-left p-3 rounded-lg transition-colors border ${
                       currentTrackIndex === index
-                        ? 'bg-white bg-opacity-20 text-white'
-                        : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
+                        ? 'bg-gray-100 border-gray-300 text-black'
+                        : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
                     }`}
                   >
                     <div className="flex items-center gap-3">
@@ -234,9 +234,9 @@ export default function FeaturedRelease({ product }) {
                       {currentTrackIndex === index && isPlaying && (
                         <div className="w-4 h-4">
                           <div className="flex items-center gap-1">
-                            <div className="w-1 h-3 bg-white animate-pulse"></div>
-                            <div className="w-1 h-2 bg-white animate-pulse" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-1 h-4 bg-white animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-1 h-3 bg-black animate-pulse"></div>
+                            <div className="w-1 h-2 bg-black animate-pulse" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-1 h-4 bg-black animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
                       )}
@@ -247,7 +247,7 @@ export default function FeaturedRelease({ product }) {
 
               <button
                 onClick={handleBuyNow}
-                className="w-full bg-white text-black font-bold py-4 px-8 text-lg rounded-lg hover:bg-gray-200 transition-colors"
+                className="w-full bg-black text-white font-bold py-4 px-8 text-lg rounded-lg hover:bg-gray-800 transition-colors"
               >
                 BUY DIGITAL ALBUM - ${product.price.toFixed(2)}
               </button>
