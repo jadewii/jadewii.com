@@ -217,7 +217,7 @@ export default function FeaturedRelease({ product }) {
                 </div>
               </div>
 
-              <div className="space-y-2 mb-8">
+              <div className="space-y-2 mb-8 max-h-96 overflow-y-auto">
                 {tracks.map((track, index) => (
                   <button
                     key={index}

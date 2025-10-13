@@ -17,6 +17,22 @@ export default function SimpleHeader() {
             <Link href="/sounds/" className="hover:text-gray-600">
               SAMPLE PACKS
             </Link>
+            <a
+              href="https://www.patreon.com/cw/jadewii/membership"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-orange-600 transition-colors"
+            >
+              PATREON
+            </a>
+            <a
+              href="https://www.youtube.com/@JAdeWii_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-red-700 transition-colors"
+            >
+              YOUTUBE
+            </a>
           </div>
         </nav>
       </div>
