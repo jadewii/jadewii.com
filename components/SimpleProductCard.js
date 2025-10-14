@@ -161,8 +161,8 @@ export default function SimpleProductCard({ product }) {
           />
         )}
 
-        {/* Hover Controls */}
-        {showControls && (
+        {/* Hover Controls - Only show for albums, not sample packs */}
+        {showControls && product.type === 'album' && (
           <div className="absolute inset-0 flex items-center justify-center">
             {/* Previous Track Button - Circle with Arrow */}
             {tracks.length > 1 && (

@@ -193,57 +193,21 @@ export default function FeaturedRelease({ product }) {
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="font-medium w-6">{index + 1}.</span>
-                    <span className="flex-1">{track}</span>
-                    {currentTrackIndex === index && isPlaying && (
-                      <div className="w-4 h-4">
-                        <div className="flex items-center gap-1">
-                          <div className="w-0.5 h-2 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite' }}></div>
-                          <div className="w-0.5 h-1.5 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite', animationDelay: '0.2s' }}></div>
-                          <div className="w-0.5 h-3 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite', animationDelay: '0.4s' }}></div>
-                        </div>
+                    {/* Track number or play button */}
+                    {currentTrackIndex === index && isPlaying ? (
+                      <div className="w-6 flex items-center justify-center">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                          <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
                       </div>
+                    ) : (
+                      <span className="font-medium w-6">{index + 1}.</span>
                     )}
+                    <span className="flex-1">{track}</span>
+                    <span className="text-xs text-gray-500">10 sec preview</span>
                   </div>
                 </button>
               ))}
-              </div>
-
-              {/* Now Playing Player - below track list */}
-              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-4">
-                <div className="flex items-center gap-4 mb-4">
-                  <button
-                    onClick={handlePlayPause}
-                    className="bg-black text-white rounded-full p-3 hover:bg-gray-800 transition-colors"
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      {isPlaying ? (
-                        <>
-                          <rect x="6" y="4" width="4" height="16" />
-                          <rect x="14" y="4" width="4" height="16" />
-                        </>
-                      ) : (
-                        <polygon points="5 3 19 12 5 21 5 3" />
-                      )}
-                    </svg>
-                  </button>
-
-                  <div className="flex-1">
-                    <div className="text-sm font-medium mb-1">
-                      {tracks[currentTrackIndex] || 'Select a track'}
-                    </div>
-                    <div className="text-xs text-gray-600">
-                      {formatTime(currentTime)} / {formatTime(duration)}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-black h-2 rounded-full transition-all duration-100"
-                    style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
-                  ></div>
-                </div>
               </div>
 
               <button
