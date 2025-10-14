@@ -67,6 +67,12 @@ export default function FeaturedRelease({ product }) {
     if (audioRef.current && duration > 0) {
       const trackStartTime = trackIndex * (duration / tracks.length)
       audioRef.current.currentTime = trackStartTime
+      // Auto-play when selecting a track
+      if (!isPlaying) {
+        audioRef.current.play()
+        setIsPlaying(true)
+        currentlyPlaying = audioRef.current
+      }
     }
   }
 
@@ -169,13 +175,42 @@ export default function FeaturedRelease({ product }) {
 
                 <div className="mt-6 text-center">
                   <h2 className="text-3xl font-bold mb-2">{product.title}</h2>
-                  <p className="text-xl text-gray-600 mb-4">{product.artist}</p>
-                  <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
+                  <p className="text-xl text-gray-600">{product.artist}</p>
                 </div>
               </div>
+            </div>
 
-              {/* Now Playing Player - directly under album */}
-              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mt-6">
+            <div>
+              <div className="space-y-1 mb-6">
+              {tracks.map((track, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleTrackSelect(index)}
+                  className={`w-full text-left px-3 py-2 rounded transition-colors border text-sm ${
+                    currentTrackIndex === index
+                      ? 'bg-gray-100 border-gray-300 text-black'
+                      : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium w-6">{index + 1}.</span>
+                    <span className="flex-1">{track}</span>
+                    {currentTrackIndex === index && isPlaying && (
+                      <div className="w-4 h-4">
+                        <div className="flex items-center gap-1">
+                          <div className="w-0.5 h-2 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite' }}></div>
+                          <div className="w-0.5 h-1.5 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite', animationDelay: '0.2s' }}></div>
+                          <div className="w-0.5 h-3 bg-black" style={{ animation: 'pulse 1s ease-in-out infinite', animationDelay: '0.4s' }}></div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </button>
+              ))}
+              </div>
+
+              {/* Now Playing Player - below track list */}
+              <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-4">
                 <div className="flex items-center gap-4 mb-4">
                   <button
                     onClick={handlePlayPause}
@@ -217,34 +252,6 @@ export default function FeaturedRelease({ product }) {
               >
                 BUY DIGITAL ALBUM - ${product.price.toFixed(2)}
               </button>
-            </div>
-
-            <div className="space-y-1">
-              {tracks.map((track, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleTrackSelect(index)}
-                  className={`w-full text-left px-3 py-2 rounded transition-colors border text-sm ${
-                    currentTrackIndex === index
-                      ? 'bg-gray-100 border-gray-300 text-black'
-                      : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="font-medium w-6">{index + 1}.</span>
-                    <span className="flex-1">{track}</span>
-                    {currentTrackIndex === index && isPlaying && (
-                      <div className="w-4 h-4">
-                        <div className="flex items-center gap-1">
-                          <div className="w-0.5 h-2 bg-black animate-pulse"></div>
-                          <div className="w-0.5 h-1.5 bg-black animate-pulse" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-0.5 h-3 bg-black animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </button>
-              ))}
             </div>
           </div>
         </div>

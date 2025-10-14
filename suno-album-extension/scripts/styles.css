@@ -1,0 +1,220 @@
+/* Suno Album Creator - Extension Styles */
+
+#suno-extractor-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+#suno-extractor-panel.minimized {
+  height: 50px;
+  overflow: hidden;
+}
+
+.suno-panel-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+
+.suno-panel-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.suno-panel-header button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.suno-panel-header button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.suno-panel-content {
+  padding: 16px;
+}
+
+.suno-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.suno-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.suno-btn {
+  background: #333;
+  border: 1px solid #555;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.suno-btn:hover {
+  background: #444;
+  border-color: #666;
+  transform: translateY(-1px);
+}
+
+.suno-btn:active {
+  transform: translateY(0);
+}
+
+.suno-song-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #2a2a2a;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #333;
+}
+
+.song-item:last-child {
+  border-bottom: none;
+}
+
+.song-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.song-title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.song-url {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.copy-btn {
+  background: #444;
+  border: 1px solid #555;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background: #555;
+}
+
+.no-songs {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.more-songs {
+  padding: 8px 12px;
+  text-align: center;
+  color: #888;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.suno-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  max-width: 400px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Scrollbar styling */
+.suno-song-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suno-song-list::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.suno-song-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 3px;
+}
+
+.suno-song-list::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

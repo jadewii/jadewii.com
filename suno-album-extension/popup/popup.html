@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 400px;
+      min-height: 500px;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 16px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .header p {
+      margin: 4px 0 0 0;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 4px;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn {
+      background: #333;
+      border: 1px solid #555;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      background: #444;
+      border-color: #666;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: #667eea;
+    }
+
+    .btn.success {
+      background: #28a745;
+      border-color: #28a745;
+    }
+
+    .album-list {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #333;
+      border-radius: 6px;
+      background: #2a2a2a;
+    }
+
+    .album-item {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .album-item:last-child {
+      border-bottom: none;
+    }
+
+    .album-info {
+      flex: 1;
+    }
+
+    .album-title {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .album-progress {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .album-actions {
+      display: flex;
+      gap: 4px;
+    }
+
+    .btn-small {
+      background: #444;
+      border: 1px solid #555;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .btn-small:hover {
+      background: #555;
+    }
+
+    .status {
+      background: #2a2a2a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .status-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-text {
+      font-size: 12px;
+      color: #ccc;
+      line-height: 1.4;
+    }
+
+    .footer {
+      padding: 16px;
+      border-top: 1px solid #333;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+    }
+
+    .error {
+      background: #dc3545;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    .success {
+      background: #28a745;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    .scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🎵 Suno Album Creator</h1>
+    <p>JAde Wii Music Management</p>
+  </div>
+
+  <div class="content">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="songs-found">0</div>
+        <div class="stat-label">Songs Found</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="albums-ready">20</div>
+        <div class="stat-label">Albums Ready</div>
+      </div>
+    </div>
+
+    <div id="status" class="status" style="display: none;">
+      <div class="status-title">
+        <span id="status-icon">ℹ️</span>
+        <span id="status-title-text">Status</span>
+      </div>
+      <div class="status-text" id="status-text"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Quick Actions</div>
+      <button id="scan-page" class="btn">
+        🔍 Scan Current Page
+      </button>
+      <button id="extract-all" class="btn primary">
+        📥 Extract All Songs
+      </button>
+      <button id="auto-assign" class="btn success">
+        🎯 Auto-Assign to Albums
+      </button>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Album Management</div>
+      <div id="album-list" class="album-list scrollbar">
+        <div class="loading">Loading albums...</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Export Options</div>
+      <button id="export-json" class="btn">
+        📄 Export as JSON
+      </button>
+      <button id="generate-code" class="btn">
+        💻 Generate Album Code
+      </button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Made for JAde Wii's music empire 🎶
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

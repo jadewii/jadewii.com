@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Suno Album Creator",
+  "version": "1.0",
+  "description": "Extract Suno songs and organize them into albums for JAde Wii's website",
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads"
+  ],
+
+  "host_permissions": [
+    "https://app.suno.ai/*",
+    "https://suno.ai/*",
+    "https://cdn1.suno.ai/*",
+    "https://cdn2.suno.ai/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://app.suno.ai/*", "https://suno.ai/*"],
+      "js": ["scripts/content.js"],
+      "css": ["scripts/styles.css"]
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Suno Album Creator",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/injected.js"],
+      "matches": ["https://app.suno.ai/*", "https://suno.ai/*"]
+    }
+  ]
+}
