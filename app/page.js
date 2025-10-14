@@ -13,8 +13,8 @@ export default function HomePage() {
   const electronic = allAlbums.filter(p => p.category === 'electronic')
   const lofi = allAlbums.filter(p => p.category === 'lofi')
 
-  // Get the latest release (first album with itch.io URL)
-  const featuredAlbum = products.find(p => p.type === 'album' && p.itchioUrl)
+  // Get the latest release (first album with purchase link)
+  const featuredAlbum = products.find(p => p.type === 'album' && (p.itchioUrl || p.bandcampUrl))
 
   return (
     <div>
