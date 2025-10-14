@@ -63,11 +63,18 @@ export default function FeaturedRelease({ product }) {
   }
 
   const handleTrackSelect = (trackIndex) => {
+    // If clicking the currently playing track, toggle play/pause
+    if (currentTrackIndex === trackIndex) {
+      handlePlayPause({ preventDefault: () => {}, stopPropagation: () => {} })
+      return
+    }
+
+    // Otherwise, switch to the new track
     setCurrentTrackIndex(trackIndex)
     if (audioRef.current && duration > 0) {
       const trackStartTime = trackIndex * (duration / tracks.length)
       audioRef.current.currentTime = trackStartTime
-      // Auto-play when selecting a track
+      // Auto-play when selecting a new track
       if (!isPlaying) {
         audioRef.current.play()
         setIsPlaying(true)
@@ -112,9 +119,15 @@ export default function FeaturedRelease({ product }) {
     }
 
     const handleEnded = () => {
-      setCurrentTrackIndex(0)
-      setIsPlaying(false)
-      currentlyPlaying = null
+      // Loop to next track, or back to first track if at end
+      const nextIndex = currentTrackIndex + 1 >= tracks.length ? 0 : currentTrackIndex + 1
+      setCurrentTrackIndex(nextIndex)
+
+      if (audioRef.current && duration > 0) {
+        const trackStartTime = nextIndex * (duration / tracks.length)
+        audioRef.current.currentTime = trackStartTime
+        audioRef.current.play()
+      }
     }
 
     const handleForceStop = () => {
@@ -193,18 +206,31 @@ export default function FeaturedRelease({ product }) {
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    {/* Track number or play button */}
-                    {currentTrackIndex === index && isPlaying ? (
-                      <div className="w-6 flex items-center justify-center">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    {/* Track number or play/pause button */}
+                    <div className="w-6 flex items-center justify-center">
+                      {currentTrackIndex === index && isPlaying ? (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                          <rect x="6" y="4" width="4" height="16" />
+                          <rect x="14" y="4" width="4" height="16" />
+                        </svg>
+                      ) : currentTrackIndex === index ? (
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
                           <polygon points="5 3 19 12 5 21 5 3" />
                         </svg>
-                      </div>
-                    ) : (
-                      <span className="font-medium w-6">{index + 1}.</span>
-                    )}
+                      ) : (
+                        <span className="font-medium text-sm">{index + 1}.</span>
+                      )}
+                    </div>
                     <span className="flex-1">{track}</span>
-                    <span className="text-xs text-gray-500">10 sec preview</span>
+                    {/* Animated waveform when playing */}
+                    {currentTrackIndex === index && isPlaying && (
+                      <div className="flex items-center gap-0.5">
+                        <div className="w-0.5 h-2 bg-black" style={{ animation: 'pulse 0.8s ease-in-out infinite' }}></div>
+                        <div className="w-0.5 h-3 bg-black" style={{ animation: 'pulse 0.8s ease-in-out infinite', animationDelay: '0.2s' }}></div>
+                        <div className="w-0.5 h-2.5 bg-black" style={{ animation: 'pulse 0.8s ease-in-out infinite', animationDelay: '0.4s' }}></div>
+                        <div className="w-0.5 h-3.5 bg-black" style={{ animation: 'pulse 0.8s ease-in-out infinite', animationDelay: '0.6s' }}></div>
+                      </div>
+                    )}
                   </div>
                 </button>
               ))}
