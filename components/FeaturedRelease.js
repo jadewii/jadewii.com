@@ -76,6 +76,8 @@ export default function FeaturedRelease({ product }) {
 
     if (product.itchioUrl) {
       window.open(product.itchioUrl, '_blank')
+    } else if (product.bandcampUrl) {
+      window.open(product.bandcampUrl, '_blank')
     } else if (product.stripePaymentLink) {
       window.location.href = product.stripePaymentLink
     } else {
@@ -139,18 +141,28 @@ export default function FeaturedRelease({ product }) {
       <div className="container-custom">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">LATEST RELEASE</h1>
-          <p className="text-xl text-gray-600">Experience the complete album before you buy</p>
+          <p className="text-xl text-gray-600">Digital albums, yours forever</p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative">
+            <div className="relative group">
               <div className="aspect-square relative overflow-hidden bg-gray-100 rounded-lg shadow-lg">
+                {/* Main album cover */}
                 <img
                   src={product.image || '/placeholder.jpg'}
                   alt={product.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 group-hover:opacity-0"
                 />
+
+                {/* Back cover - shows on hover */}
+                {product.hoverImage && (
+                  <img
+                    src={product.hoverImage}
+                    alt={`${product.title} - Back`}
+                    className="w-full h-full object-cover absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                  />
+                )}
 
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <button
@@ -217,7 +229,7 @@ export default function FeaturedRelease({ product }) {
                 </div>
               </div>
 
-              <div className="space-y-2 mb-8 max-h-96 overflow-y-auto">
+              <div className="space-y-2 mb-8">
                 {tracks.map((track, index) => (
                   <button
                     key={index}

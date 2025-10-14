@@ -70,7 +70,7 @@ export default function SimpleProductCard({ product }) {
     }
   }
 
-  // Simple direct purchase - link to Itch.io!
+  // Simple direct purchase - link to Itch.io or Bandcamp!
   const handleBuyNow = async (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -78,6 +78,9 @@ export default function SimpleProductCard({ product }) {
     // If we have an Itch.io link, use it
     if (product.itchioUrl) {
       window.open(product.itchioUrl, '_blank')
+    } else if (product.bandcampUrl) {
+      // Use Bandcamp if available
+      window.open(product.bandcampUrl, '_blank')
     } else if (product.stripePaymentLink) {
       // Fall back to Stripe if configured
       window.location.href = product.stripePaymentLink
