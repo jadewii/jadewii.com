@@ -43,6 +43,9 @@ export default function AppsPage() {
               <span className="hidden md:inline">Music Apps</span>
               <span className="md:hidden">iOS Music Apps</span>
             </h1>
+            <p className="text-xl text-gray-600">
+              A collection of creative audio tools for the sound explorer
+            </p>
           </div>
 
           {/* Sticker Book Grid */}
