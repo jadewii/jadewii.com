@@ -14,8 +14,8 @@ export default function AppsPage() {
     },
     {
       id: 'waveface',
-      name: 'WaveFace',
-      icon: '/images/apps/waveface-icon.png',
+      name: 'Up Next...',
+      icon: null,
       available: false,
       link: null
     },
@@ -36,18 +36,13 @@ export default function AppsPage() {
 
           {/* Header */}
           <div className="mb-12">
-            <Image
-              src="/images/jade8bit.gif"
-              alt="JAde Wii"
-              width={80}
-              height={80}
-              unoptimized
-              className="mx-auto mb-4"
-            />
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">A NEW ERA</h1>
-            <p className="text-xl text-gray-600">
-              A collection of creative audio tools by JAde Wii
-            </p>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 flex items-center justify-center gap-3">
+              <svg className="w-10 h-10 md:w-14 md:h-14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              <span className="hidden md:inline">Music Apps</span>
+              <span className="md:hidden">iOS Music Apps</span>
+            </h1>
           </div>
 
           {/* Sticker Book Grid */}
@@ -60,45 +55,42 @@ export default function AppsPage() {
                 {app.available ? (
                   // Available app - clickable
                   <Link href={app.link} className="block">
-                    <div className="sticker-card available aspect-square">
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={app.icon}
-                          alt={app.name}
-                          fill
-                          className="object-cover rounded-3xl"
-                        />
+                    <div className="relative">
+                      <div className="sticker-card available aspect-square">
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={app.icon}
+                            alt={app.name}
+                            fill
+                            className="object-cover rounded-3xl"
+                          />
+                        </div>
+                      </div>
+                      {/* NEW Badge */}
+                      <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                        NEW!
                       </div>
                     </div>
                     <h3 className="font-bold text-base md:text-lg text-center mt-3">
                       {app.name}
                     </h3>
                   </Link>
-                ) : app.icon ? (
-                  // Coming soon app
+                ) : app.name ? (
+                  // Coming soon app with no icon
                   <div>
                     <div className="sticker-card coming-soon aspect-square">
-                      <div className="relative w-full h-full opacity-40">
-                        <Image
-                          src={app.icon}
-                          alt={app.name}
-                          fill
-                          className="object-cover rounded-3xl grayscale"
-                        />
+                      <div className="flex items-center justify-center h-full">
+                        <div className="text-6xl text-gray-400">?</div>
                       </div>
                     </div>
                     <h3 className="font-bold text-base md:text-lg text-center text-gray-500 mt-3">
                       {app.name}
                     </h3>
-                    <p className="text-xs text-gray-400 text-center mt-1">Coming Soon</p>
                   </div>
                 ) : (
                   // Empty slot
                   <div>
                     <div className="sticker-card empty aspect-square">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="text-6xl text-gray-300">?</div>
-                      </div>
                     </div>
                   </div>
                 )}
@@ -106,32 +98,22 @@ export default function AppsPage() {
             ))}
           </div>
 
-          {/* Footer note */}
-          <div className="mt-12 text-center text-gray-600">
-            <p className="text-sm">More apps coming soon!</p>
-          </div>
-
-          {/* Patreon Support Section */}
-          <div className="mt-16 max-w-2xl mx-auto">
-            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 md:p-10 border-2 border-gray-300 shadow-lg">
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-black">
-                Support My Creative Work
-              </h3>
-              <p className="text-gray-800 mb-6">
-                I create apps, music albums, tutorials, reviews, and videos. Your support on Patreon helps me keep creating and sharing my work with the world.
-              </p>
-              <a
-                href="https://www.patreon.com/cw/jadewii/membership"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-                </svg>
-                Support on Patreon
-              </a>
-            </div>
+          {/* Patreon Support Button */}
+          <div className="mt-16 text-center">
+            <a
+              href="https://www.patreon.com/cw/jadewii/membership"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+              </svg>
+              Support on Patreon
+            </a>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto">
+              Your support on Patreon helps me keep creating and sharing my work with the world.
+            </p>
           </div>
 
         </div>
@@ -159,7 +141,6 @@ export default function AppsPage() {
         .sticker-card.available:hover {
           transform: translateY(-4px) rotate(2deg);
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-          border-color: #9333EA;
         }
 
         .sticker-card.coming-soon {
