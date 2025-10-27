@@ -23,9 +23,6 @@ export default function SimpleHeader() {
             <Link href="/albums" className="hover:text-gray-600">
               ALBUMS
             </Link>
-            <Link href="/sounds/" className="hover:text-gray-600">
-              SAMPLE PACKS
-            </Link>
             <Link href="/apps" className="hover:text-gray-600">
               APPS
             </Link>
