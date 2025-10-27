@@ -1,240 +1,176 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function AppsPage() {
+  const apps = [
+    {
+      id: 'noiseface',
+      name: 'NoiseFace',
+      icon: '/images/apps/noiseface-icon.png',
+      available: true,
+      link: '/apps/noiseface'
+    },
+    {
+      id: 'waveface',
+      name: 'WaveFace',
+      icon: '/images/apps/waveface-icon.png',
+      available: false,
+      link: null
+    },
+    // Empty slots for future apps
+    ...Array(6).fill(null).map((_, i) => ({
+      id: `slot-${i + 3}`,
+      name: null,
+      icon: null,
+      available: false,
+      link: null
+    }))
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
       <div className="container-custom py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
 
-          {/* Announcement Badge */}
-          <div className="inline-block mb-6 animate-bounce">
-            <span className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full text-sm font-semibold shadow-lg">
-              MY FIRST IOS APP!
-            </span>
-          </div>
-
-          {/* Title */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
-            NoiseFace
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-700 mb-8">
-            Interactive noise generator and mixer
-          </p>
-
-          {/* Hero Image */}
-          <div className="flex justify-center mb-12">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 animate-float">
-              <Image
-                src="/images/apps/noiseface-hero.png"
-                alt="NoiseFace Character"
-                fill
-                className="object-contain drop-shadow-2xl"
-                priority
-              />
-            </div>
-          </div>
-
-          {/* App Store Button */}
+          {/* Header */}
           <div className="mb-12">
-            <a
-              href="https://apps.apple.com/us/app/noiseface/id6754266069"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block transform hover:scale-105 transition-transform duration-200"
-            >
-              <Image
-                src="/images/apps/appstore.svg"
-                alt="Download on the App Store"
-                width={180}
-                height={60}
-                className="drop-shadow-md"
-              />
-            </a>
+            <Image
+              src="/images/jade8bit.gif"
+              alt="JAde Wii"
+              width={80}
+              height={80}
+              unoptimized
+              className="mx-auto mb-4"
+            />
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">A NEW ERA</h1>
+            <p className="text-xl text-gray-600">
+              A collection of creative audio tools by JAde Wii
+            </p>
           </div>
 
-          {/* Features Grid */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-              <div className="flex flex-col items-center">
-                <div className="arcade-button pink-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">12 Noise Colors</h3>
-                <p className="text-sm text-gray-600 text-center">Mix and blend different noise types to create your perfect sound</p>
+          {/* Sticker Book Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            {apps.map((app) => (
+              <div
+                key={app.id}
+                className="sticker-slot"
+              >
+                {app.available ? (
+                  // Available app - clickable
+                  <Link href={app.link} className="block">
+                    <div className="sticker-card available aspect-square">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={app.icon}
+                          alt={app.name}
+                          fill
+                          className="object-cover rounded-3xl"
+                        />
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-base md:text-lg text-center mt-3">
+                      {app.name}
+                    </h3>
+                  </Link>
+                ) : app.icon ? (
+                  // Coming soon app
+                  <div>
+                    <div className="sticker-card coming-soon aspect-square">
+                      <div className="relative w-full h-full opacity-40">
+                        <Image
+                          src={app.icon}
+                          alt={app.name}
+                          fill
+                          className="object-cover rounded-3xl grayscale"
+                        />
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-base md:text-lg text-center text-gray-500 mt-3">
+                      {app.name}
+                    </h3>
+                    <p className="text-xs text-gray-400 text-center mt-1">Coming Soon</p>
+                  </div>
+                ) : (
+                  // Empty slot
+                  <div>
+                    <div className="sticker-card empty aspect-square">
+                      <div className="flex items-center justify-center h-full">
+                        <div className="text-6xl text-gray-300">?</div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-
-              <div className="flex flex-col items-center">
-                <div className="arcade-button blue-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">Oscilloscope</h3>
-                <p className="text-sm text-gray-600 text-center">Watch the mouth animate as you interact with sliders and sounds</p>
-              </div>
-
-              <div className="flex flex-col items-center">
-                <div className="arcade-button white-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">Save Presets</h3>
-                <p className="text-sm text-gray-600 text-center">Store your favorite combinations for instant recall</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-3">
-              <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                📱 iOS/iPadOS
-              </span>
-              <span className="px-4 py-2 bg-white border-2 border-blue-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                ⚡ Real-time Audio
-              </span>
-              <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                🎧 High Quality
-              </span>
-            </div>
+            ))}
           </div>
 
-          {/* QR Code Section */}
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-10 shadow-2xl border-2 border-gray-200 max-w-md mx-auto hover:shadow-3xl transition-shadow">
-            <h3 className="text-2xl font-bold mb-4 text-black">Scan to Download 🥳</h3>
-            <p className="text-gray-700 mb-6">
-              Point your camera at the QR code
-            </p>
+          {/* Footer note */}
+          <div className="mt-12 text-center text-gray-600">
+            <p className="text-sm">More apps coming soon!</p>
+          </div>
 
-            <div className="flex justify-center mb-6">
-              <div className="relative w-56 h-56 bg-white p-4 rounded-2xl shadow-lg">
-                <Image
-                  src="/images/apps/qr-code.jpg"
-                  alt="Download QR Code"
-                  fill
-                  className="object-contain p-3"
-                />
-              </div>
+          {/* Patreon Support Section */}
+          <div className="mt-16 max-w-2xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-8 md:p-10 border-2 border-gray-300 shadow-lg">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-black">
+                Support My Creative Work
+              </h3>
+              <p className="text-gray-800 mb-6">
+                I create apps, music albums, tutorials, reviews, and videos. Your support on Patreon helps me keep creating and sharing my work with the world.
+              </p>
+              <a
+                href="https://www.patreon.com/cw/jadewii/membership"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+                </svg>
+                Support on Patreon
+              </a>
             </div>
-
-            <p className="text-sm text-gray-600">
-              Available for iPhone & iPad.<br />
-              MACOS and VisionOS versions coming soon.
-            </p>
           </div>
 
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-
-        /* Arcade button style - 3D sphere like the app */
-        .arcade-button {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
+        .sticker-slot {
           position: relative;
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-          transform-style: preserve-3d;
-          animation: rotate3d 8s ease-in-out infinite;
         }
 
-        @keyframes rotate3d {
-          0%, 100% {
-            transform: rotateY(0deg) rotateX(5deg);
-          }
-          25% {
-            transform: rotateY(15deg) rotateX(-5deg);
-          }
-          50% {
-            transform: rotateY(0deg) rotateX(5deg);
-          }
-          75% {
-            transform: rotateY(-15deg) rotateX(-5deg);
-          }
+        .sticker-card {
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /* Outer rim (white border) */
-        .arcade-button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          border-radius: 50%;
-          background: white;
-          z-index: 1;
-          transform-style: preserve-3d;
+        .sticker-card.available {
+          border: 3px solid #E5E7EB;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+          overflow: hidden;
         }
 
-        /* Inner dome with 3D gradient */
-        .arcade-button::after {
-          content: '';
-          position: absolute;
-          top: 15%;
-          left: 15%;
-          right: 15%;
-          bottom: 15%;
-          border-radius: 50%;
-          z-index: 2;
-          transform-style: preserve-3d;
+        .sticker-card.available:hover {
+          transform: translateY(-4px) rotate(2deg);
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+          border-color: #9333EA;
         }
 
-        /* Pink button */
-        .pink-button::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #FFB6C1,
-            #FF69B4 50%,
-            #FF1493
-          );
-          box-shadow:
-            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
-            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
+        .sticker-card.coming-soon {
+          border: 3px dashed #D1D5DB;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+          overflow: hidden;
         }
 
-        /* Blue button */
-        .blue-button::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #87CEEB,
-            #4682B4 50%,
-            #1E90FF
-          );
-          box-shadow:
-            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
-            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Green button */
-        .white-button::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #90EE90,
-            #32CD32 50%,
-            #228B22
-          );
-          box-shadow:
-            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
-            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
+        .sticker-card.empty {
+          background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+          border: 3px dashed #E5E7EB;
         }
       `}</style>
     </div>
