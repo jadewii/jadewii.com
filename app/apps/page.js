@@ -1,167 +1,242 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function AppsPage() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-16">
-        <div className="container-custom">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">iOS Apps</h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Creative audio tools for iOS, iPadOS, and visionOS
-            </p>
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
+      <div className="container-custom py-16 md:py-24">
+        <div className="max-w-4xl mx-auto text-center">
+
+          {/* Announcement Badge */}
+          <div className="inline-block mb-6 animate-bounce">
+            <span className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full text-sm font-semibold shadow-lg">
+              MY FIRST IOS APP!
+            </span>
           </div>
 
-          {/* NoiseFace Hero Image */}
-          <div className="flex justify-center mb-8">
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
+          {/* Title */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
+            NoiseFace
+          </h1>
+
+          <p className="text-xl md:text-2xl text-gray-700 mb-8">
+            Interactive noise generator and mixer
+          </p>
+
+          {/* Hero Image */}
+          <div className="flex justify-center mb-12">
+            <div className="relative w-72 h-72 md:w-96 md:h-96 animate-float">
               <Image
                 src="/images/apps/noiseface-hero.png"
                 alt="NoiseFace Character"
                 fill
-                className="object-contain"
+                className="object-contain drop-shadow-2xl"
                 priority
               />
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Apps Section */}
-      <div className="container-custom py-12">
-        <div className="max-w-4xl mx-auto space-y-8">
+          {/* App Store Button */}
+          <div className="mb-12">
+            <a
+              href="https://apps.apple.com/us/app/noiseface/id6754266069"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transform hover:scale-105 transition-transform duration-200"
+            >
+              <Image
+                src="/images/apps/appstore.svg"
+                alt="Download on the App Store"
+                width={180}
+                height={60}
+                className="drop-shadow-md"
+              />
+            </a>
+          </div>
 
-          {/* NoiseFace Card */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <div className="flex-shrink-0">
-                <div className="relative w-24 h-24 md:w-28 md:h-28">
-                  <Image
-                    src="/images/apps/noiseface-icon.png"
-                    alt="NoiseFace Icon"
-                    fill
-                    className="object-contain rounded-2xl"
-                  />
-                </div>
+          {/* Features Grid */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+              <div className="flex flex-col items-center">
+                <div className="arcade-button pink-button mb-4"></div>
+                <h3 className="font-bold text-lg mb-2">12 Noise Colors</h3>
+                <p className="text-sm text-gray-600 text-center">Mix and blend different noise types to create your perfect sound</p>
               </div>
 
-              <div className="flex-1">
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">NoiseFace</h2>
-                <p className="text-gray-700 text-lg mb-4">
-                  A cute noise generator that visualizes sound through an adorable animated character.
-                  Mix up to 12 different noise colors, save your favorite combinations, and watch the waveforms dance!
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    Noise Generator
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    Audio Visualization
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    iOS/iPadOS/visionOS
-                  </span>
-                </div>
-
-                <div className="text-sm text-gray-600 mb-4">
-                  <p className="mb-2">
-                    <strong>Features:</strong> 12 noise types • Real-time waveform display •
-                    Preset saving • Dark mode • Universal app
-                  </p>
-                </div>
+              <div className="flex flex-col items-center">
+                <div className="arcade-button blue-button mb-4"></div>
+                <h3 className="font-bold text-lg mb-2">Oscilloscope</h3>
+                <p className="text-sm text-gray-600 text-center">Watch the mouth animate as you interact with sliders and sounds</p>
               </div>
+
+              <div className="flex flex-col items-center">
+                <div className="arcade-button white-button mb-4"></div>
+                <h3 className="font-bold text-lg mb-2">Save Presets</h3>
+                <p className="text-sm text-gray-600 text-center">Store your favorite combinations for instant recall</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3">
+              <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
+                📱 iOS/iPadOS
+              </span>
+              <span className="px-4 py-2 bg-white border-2 border-blue-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
+                ⚡ Real-time Audio
+              </span>
+              <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
+                🎧 High Quality
+              </span>
             </div>
           </div>
 
-          {/* WaveFace Card */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex flex-col md:flex-row gap-6 items-start">
-              <div className="flex-shrink-0">
-                <div className="relative w-24 h-24 md:w-28 md:h-28">
-                  <Image
-                    src="/images/apps/waveface-icon.png"
-                    alt="WaveFace Icon"
-                    fill
-                    className="object-contain rounded-2xl"
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1">
-                <h2 className="text-2xl md:text-3xl font-bold mb-3">WaveFace</h2>
-                <p className="text-gray-700 text-lg mb-4">
-                  Professional waveform generator for iOS. Create and customize audio waveforms with 20+
-                  different wave types including sine, square, sawtooth, triangle, and many more.
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    Waveform Generator
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    20+ Wave Types
-                  </span>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                    iOS/iPadOS/visionOS
-                  </span>
-                </div>
-
-                <div className="text-sm text-gray-600 mb-4">
-                  <p className="mb-2">
-                    <strong>Features:</strong> 20+ waveforms • Frequency control •
-                    Amplitude adjustment • Real-time preview • Universal app
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Download Section with QR Code */}
-        <div className="max-w-2xl mx-auto mt-16 text-center">
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-10 border border-gray-200">
-            <h3 className="text-2xl font-bold mb-4">Download Now</h3>
+          {/* QR Code Section */}
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-10 shadow-2xl border-2 border-gray-200 max-w-md mx-auto hover:shadow-3xl transition-shadow">
+            <h3 className="text-2xl font-bold mb-4 text-black">Scan to Download 🥳</h3>
             <p className="text-gray-700 mb-6">
-              Scan the QR code with your iPhone or iPad to download
+              Point your camera at the QR code
             </p>
 
             <div className="flex justify-center mb-6">
-              <div className="relative w-48 h-48 bg-white p-4 rounded-xl shadow-md">
+              <div className="relative w-56 h-56 bg-white p-4 rounded-2xl shadow-lg">
                 <Image
                   src="/images/apps/qr-code.jpg"
                   alt="Download QR Code"
                   fill
-                  className="object-contain p-2"
+                  className="object-contain p-3"
                 />
               </div>
             </div>
 
             <p className="text-sm text-gray-600">
-              Available on the App Store for iPhone, iPad, and Apple Vision Pro
+              Available for iPhone & iPad.<br />
+              MACOS and VisionOS versions coming soon.
             </p>
           </div>
-        </div>
 
-        {/* Support Links */}
-        <div className="max-w-2xl mx-auto mt-12 text-center text-sm text-gray-600">
-          <p>
-            Need help? Check out the{' '}
-            <a href="/support" className="text-blue-600 hover:underline">
-              support page
-            </a>
-            {' '}or{' '}
-            <a href="mailto:support@jadewii.com" className="text-blue-600 hover:underline">
-              contact us
-            </a>
-          </p>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out;
+        }
+
+        /* Arcade button style - 3D sphere like the app */
+        .arcade-button {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          position: relative;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+          transform-style: preserve-3d;
+          animation: rotate3d 8s ease-in-out infinite;
+        }
+
+        @keyframes rotate3d {
+          0%, 100% {
+            transform: rotateY(0deg) rotateX(5deg);
+          }
+          25% {
+            transform: rotateY(15deg) rotateX(-5deg);
+          }
+          50% {
+            transform: rotateY(0deg) rotateX(5deg);
+          }
+          75% {
+            transform: rotateY(-15deg) rotateX(-5deg);
+          }
+        }
+
+        /* Outer rim (white border) */
+        .arcade-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 50%;
+          background: white;
+          z-index: 1;
+          transform-style: preserve-3d;
+        }
+
+        /* Inner dome with 3D gradient */
+        .arcade-button::after {
+          content: '';
+          position: absolute;
+          top: 15%;
+          left: 15%;
+          right: 15%;
+          bottom: 15%;
+          border-radius: 50%;
+          z-index: 2;
+          transform-style: preserve-3d;
+        }
+
+        /* Pink button */
+        .pink-button::after {
+          background: radial-gradient(
+            circle at 40% 35%,
+            #FFB6C1,
+            #FF69B4 50%,
+            #FF1493
+          );
+          box-shadow:
+            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
+            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Blue button */
+        .blue-button::after {
+          background: radial-gradient(
+            circle at 40% 35%,
+            #87CEEB,
+            #4682B4 50%,
+            #1E90FF
+          );
+          box-shadow:
+            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
+            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Green button */
+        .white-button::after {
+          background: radial-gradient(
+            circle at 40% 35%,
+            #90EE90,
+            #32CD32 50%,
+            #228B22
+          );
+          box-shadow:
+            inset -5px -5px 15px rgba(0, 0, 0, 0.15),
+            inset 5px 5px 15px rgba(255, 255, 255, 0.6);
+        }
+      `}</style>
     </div>
   )
 }
