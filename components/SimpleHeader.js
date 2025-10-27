@@ -1,22 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function SimpleHeader() {
   return (
     <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
       <div className="container-custom py-4">
         <nav className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-            <Image
-              src="/images/jade8bit.gif"
-              alt="JAde Wii"
-              width={28}
-              height={28}
-              unoptimized
-              className="inline-block"
-            />
+          <Link href="/" className="text-xl font-bold">
             JAde Wii
           </Link>
           <div className="flex items-center space-x-6">
