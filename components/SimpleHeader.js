@@ -17,6 +17,9 @@ export default function SimpleHeader() {
             <Link href="/sounds/" className="hover:text-gray-600">
               SAMPLE PACKS
             </Link>
+            <Link href="/apps" className="hover:text-gray-600">
+              APPS
+            </Link>
             <a
               href="https://www.patreon.com/cw/jadewii/membership"
               target="_blank"
