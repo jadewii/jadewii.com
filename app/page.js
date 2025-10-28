@@ -30,6 +30,24 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Patreon Support Button */}
+          <div className="mb-12 text-center">
+            <a
+              href="https://www.patreon.com/cw/jadewii/membership"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+              </svg>
+              Support on Patreon
+            </a>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto">
+              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
+            </p>
+          </div>
+
           {/* App Store Button */}
           <div className="mb-12">
             <a
@@ -105,24 +123,6 @@ export default function HomePage() {
 
             <p className="text-sm text-gray-600">
               Available for iPhone & iPad.
-            </p>
-          </div>
-
-          {/* Patreon Support Section */}
-          <div className="mt-16 text-center">
-            <a
-              href="https://www.patreon.com/cw/jadewii/membership"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-              </svg>
-              Support on Patreon
-            </a>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto">
-              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
             </p>
           </div>
 
@@ -229,13 +229,15 @@ export default function HomePage() {
           transition: background 0.3s ease;
         }
 
-        .pink-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #FFFFFF,
-            #E5E5E5 50%,
-            #CCCCCC
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .pink-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #FFFFFF,
+              #E5E5E5 50%,
+              #CCCCCC
+            );
+          }
         }
 
         /* Blue button */
@@ -252,13 +254,15 @@ export default function HomePage() {
           transition: background 0.3s ease;
         }
 
-        .blue-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #FF6B6B,
-            #E74C3C 50%,
-            #C0392B
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .blue-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #FF6B6B,
+              #E74C3C 50%,
+              #C0392B
+            );
+          }
         }
 
         /* Green button */
@@ -275,13 +279,15 @@ export default function HomePage() {
           transition: background 0.3s ease;
         }
 
-        .green-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #D2691E,
-            #8B4513 50%,
-            #654321
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .green-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #D2691E,
+              #8B4513 50%,
+              #654321
+            );
+          }
         }
       `}</style>
     </div>
