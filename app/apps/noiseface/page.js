@@ -19,7 +19,7 @@ export default function AppsPage() {
 
           {/* Hero Image */}
           <div className="flex justify-center mb-12">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 animate-float">
+            <div className="relative w-36 h-36 md:w-96 md:h-96 animate-float">
               <Image
                 src="/images/apps/noiseface-hero.png"
                 alt="NoiseFace Character"
