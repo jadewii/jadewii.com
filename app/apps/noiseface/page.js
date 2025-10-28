@@ -31,7 +31,7 @@ export default function AppsPage() {
           </div>
 
           {/* App Store Button */}
-          <div className="mb-12">
+          <div className="mb-12 text-center">
             <a
               href="https://apps.apple.com/us/app/noiseface/id6754266069"
               target="_blank"
@@ -108,8 +108,8 @@ export default function AppsPage() {
             </p>
           </div>
 
-          {/* Patreon Support Section */}
-          <div className="mt-16 text-center">
+          {/* Patreon Support Button */}
+          <div className="mt-16 mb-8 text-center">
             <a
               href="https://www.patreon.com/cw/jadewii/membership"
               target="_blank"
@@ -121,7 +121,7 @@ export default function AppsPage() {
               </svg>
               Support on Patreon
             </a>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto">
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
               Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
             </p>
           </div>

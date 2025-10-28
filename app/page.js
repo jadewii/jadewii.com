@@ -30,22 +30,22 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Patreon Support Button */}
+          {/* App Store Button */}
           <div className="mb-12 text-center">
             <a
-              href="https://www.patreon.com/cw/jadewii/membership"
+              href="https://apps.apple.com/us/app/noiseface/id6754266069"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+              className="inline-block transform hover:scale-105 transition-transform duration-200"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-              </svg>
-              Support on Patreon
+              <Image
+                src="/images/apps/appstore.svg"
+                alt="Download on the App Store"
+                width={180}
+                height={60}
+                className="drop-shadow-md"
+              />
             </a>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto">
-              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
-            </p>
           </div>
 
           {/* Features Grid */}
@@ -108,22 +108,22 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* App Store Button */}
+          {/* Patreon Support Button */}
           <div className="mt-16 mb-8 text-center">
             <a
-              href="https://apps.apple.com/us/app/noiseface/id6754266069"
+              href="https://www.patreon.com/cw/jadewii/membership"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block transform hover:scale-105 transition-transform duration-200"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
             >
-              <Image
-                src="/images/apps/appstore.svg"
-                alt="Download on the App Store"
-                width={180}
-                height={60}
-                className="drop-shadow-md"
-              />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+              </svg>
+              Support on Patreon
             </a>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
+              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
+            </p>
           </div>
 
         </div>
