@@ -48,24 +48,6 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* App Store Button */}
-          <div className="mb-12">
-            <a
-              href="https://apps.apple.com/us/app/noiseface/id6754266069"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block transform hover:scale-105 transition-transform duration-200"
-            >
-              <Image
-                src="/images/apps/appstore.svg"
-                alt="Download on the App Store"
-                width={180}
-                height={60}
-                className="drop-shadow-md"
-              />
-            </a>
-          </div>
-
           {/* Features Grid */}
           <div className="max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
@@ -124,6 +106,24 @@ export default function HomePage() {
             <p className="text-sm text-gray-600">
               Available for iPhone & iPad.
             </p>
+          </div>
+
+          {/* App Store Button */}
+          <div className="mt-16 mb-8 text-center">
+            <a
+              href="https://apps.apple.com/us/app/noiseface/id6754266069"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transform hover:scale-105 transition-transform duration-200"
+            >
+              <Image
+                src="/images/apps/appstore.svg"
+                alt="Download on the App Store"
+                width={180}
+                height={60}
+                className="drop-shadow-md"
+              />
+            </a>
           </div>
 
         </div>
