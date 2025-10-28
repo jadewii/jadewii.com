@@ -67,7 +67,7 @@ export default function HomePage() {
 
               <div className="flex flex-col items-center">
                 <div className="arcade-button green-button mb-2 md:mb-4"></div>
-                <h3 className="font-bold text-xs md:text-lg mb-1 md:mb-2">Presets</h3>
+                <h3 className="font-bold text-xs md:text-lg mb-1 md:mb-2">Save Presets</h3>
                 <p className="text-xs md:text-sm text-gray-600 text-center hidden md:block">Instantly recall your favorite sound combinations with one tap</p>
               </div>
             </div>
@@ -80,7 +80,7 @@ export default function HomePage() {
                 ⚡ Real-time Audio
               </span>
               <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                🎧 Studio Quality
+                🎧 High Quality
               </span>
             </div>
           </div>
@@ -93,12 +93,12 @@ export default function HomePage() {
             </p>
 
             <div className="flex justify-center mb-6">
-              <div className="relative w-56 h-56 rounded-3xl shadow-2xl overflow-hidden">
+              <div className="relative w-56 h-56 bg-white p-4 rounded-2xl shadow-lg">
                 <Image
-                  src="/images/apps/faceqr.png"
+                  src="/images/apps/qr-code.jpg"
                   alt="Download QR Code"
                   fill
-                  className="object-cover"
+                  className="object-contain p-3"
                 />
               </div>
             </div>
