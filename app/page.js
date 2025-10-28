@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
       <div className="container-custom py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center flex flex-col">
+        <div className="max-w-4xl mx-auto text-center">
 
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
@@ -31,8 +31,26 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* App Store Button */}
+          <div className="mt-12 mb-8 text-center">
+            <a
+              href="https://apps.apple.com/us/app/noiseface/id6754266069"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transform hover:scale-105 transition-transform duration-200"
+            >
+              <Image
+                src="/images/apps/appstore.svg"
+                alt="Download on the App Store"
+                width={180}
+                height={60}
+                className="drop-shadow-md"
+              />
+            </a>
+          </div>
+
           {/* Support Button */}
-          <div className="mb-12 text-center order-2 md:order-1">
+          <div className="mt-12 mb-12 text-center">
             <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
               Donate
             </Link>
@@ -99,24 +117,6 @@ export default function HomePage() {
             <p className="text-sm text-gray-600">
               Available for iPhone & iPad.
             </p>
-          </div>
-
-          {/* App Store Button */}
-          <div className="mt-12 mb-8 text-center order-1 md:order-2">
-            <a
-              href="https://apps.apple.com/us/app/noiseface/id6754266069"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block transform hover:scale-105 transition-transform duration-200"
-            >
-              <Image
-                src="/images/apps/appstore.svg"
-                alt="Download on the App Store"
-                width={180}
-                height={60}
-                className="drop-shadow-md"
-              />
-            </a>
           </div>
 
         </div>

@@ -31,11 +31,11 @@ export default function SupportPage() {
 
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
-            ❤️ DONATE
+            DONATE
           </h1>
 
           <p className="text-base md:text-lg text-gray-700 mb-12 max-w-2xl mx-auto px-4">
-            It's because of fans like you that I can continue to do what I do!
+            It's because of humanoids like yourself that I can continue to do what I do! ❤️
           </p>
 
           {/* Payment Type Toggle */}
