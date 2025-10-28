@@ -16,9 +16,7 @@ export default function FeaturedRelease({ product }) {
     : ['Preview']
 
   const getAudioSrc = () => {
-    const baseUrl = 'https://jadewii.github.io/jadewiiwebsiteaudio'
-    const audioUrl = `${baseUrl}/${product.id}.mp3`
-    return audioUrl
+    return `/audio/${product.id}.mp3`
   }
 
   const handlePlayPause = (e) => {

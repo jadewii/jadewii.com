@@ -17,7 +17,7 @@ export default function SimpleHeader() {
               unoptimized
               className="inline-block"
             />
-            JAde Wii
+            <span className="hidden md:inline">JAde Wii</span>
           </Link>
           <div className="flex items-center space-x-6">
             <Link href="/albums" className="hover:text-gray-600">
