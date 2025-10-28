@@ -19,8 +19,8 @@ export default function HomePage() {
           </p>
 
           {/* Hero Image */}
-          <div className="hidden md:flex justify-center mb-12">
-            <div className="relative w-96 h-96 animate-float">
+          <div className="flex justify-center mb-12">
+            <div className="relative w-36 h-36 md:w-96 md:h-96 animate-float">
               <Image
                 src="/images/apps/noiseface-hero.png"
                 alt="NoiseFace Character"

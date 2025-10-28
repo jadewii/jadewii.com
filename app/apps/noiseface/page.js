@@ -7,7 +7,7 @@ export default function AppsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
       <div className="container-custom py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center flex flex-col">
+        <div className="max-w-4xl mx-auto text-center">
 
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
@@ -31,37 +31,45 @@ export default function AppsPage() {
             </div>
           </div>
 
-          {/* Support Button */}
-          <div className="mb-12 text-center order-2 md:order-1">
-            <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
-              Donate
-            </Link>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
-              Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
-            </p>
+          {/* App Store Button */}
+          <div className="mt-12 mb-8 text-center">
+            <a
+              href="https://apps.apple.com/us/app/noiseface/id6754266069"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block transform hover:scale-105 transition-transform duration-200"
+            >
+              <Image
+                src="/images/apps/appstore.svg"
+                alt="Download on the App Store"
+                width={180}
+                height={60}
+                className="drop-shadow-md"
+              />
+            </a>
           </div>
 
           {/* Features Grid */}
           <div className="max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <div className="grid grid-cols-3 gap-4 md:gap-8 mb-10">
               <div className="flex flex-col items-center">
-                <div className="arcade-button pink-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">Mix & Match</h3>
-                <p className="text-sm text-gray-600 text-center">Blend noise colors to craft your perfect soundscape</p>
+                <div className="arcade-button pink-button mb-2 md:mb-4"></div>
+                <h3 className="font-bold text-xs md:text-lg mb-1 md:mb-2">Mix & Match</h3>
+                <p className="text-xs md:text-sm text-gray-600 text-center hidden md:block">Blend noise colors to craft your perfect soundscape</p>
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="arcade-button blue-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">Oscilloscope</h3>
-                <p className="text-sm text-gray-600 text-center">Professional sound visualizer that brings audio to life with real-time animations</p>
+                <div className="arcade-button blue-button mb-2 md:mb-4"></div>
+                <h3 className="font-bold text-xs md:text-lg mb-1 md:mb-2">Oscilloscope</h3>
+                <p className="text-xs md:text-sm text-gray-600 text-center hidden md:block">Professional sound visualizer that brings audio to life with real-time animations</p>
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="arcade-button green-button mb-4"></div>
-                <h3 className="font-bold text-lg mb-2">Save Presets</h3>
-                <p className="text-sm text-gray-600 text-center">Instantly recall your favorite sound combinations with one tap</p>
+                <div className="arcade-button green-button mb-2 md:mb-4"></div>
+                <h3 className="font-bold text-xs md:text-lg mb-1 md:mb-2">Save Presets</h3>
+                <p className="text-xs md:text-sm text-gray-600 text-center hidden md:block">Instantly recall your favorite sound combinations with one tap</p>
               </div>
             </div>
 
@@ -73,7 +81,7 @@ export default function AppsPage() {
                 ⚡ Real-time Audio
               </span>
               <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                🎧 High Quality
+                🎧 Studio Quality
               </span>
             </div>
           </div>
@@ -101,22 +109,14 @@ export default function AppsPage() {
             </p>
           </div>
 
-          {/* App Store Button */}
-          <div className="mt-12 mb-8 text-center order-1 md:order-2">
-            <a
-              href="https://apps.apple.com/us/app/noiseface/id6754266069"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block transform hover:scale-105 transition-transform duration-200"
-            >
-              <Image
-                src="/images/apps/appstore.svg"
-                alt="Download on the App Store"
-                width={180}
-                height={60}
-                className="drop-shadow-md"
-              />
-            </a>
+          {/* Support Button */}
+          <div className="mt-12 mb-12 text-center">
+            <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
+              Donate
+            </Link>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
+              Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
+            </p>
           </div>
 
         </div>
@@ -150,13 +150,20 @@ export default function AppsPage() {
 
         /* Arcade button style - 3D sphere like the app */
         .arcade-button {
-          width: 120px;
-          height: 120px;
+          width: 70px;
+          height: 70px;
           border-radius: 50%;
           position: relative;
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
           transform-style: preserve-3d;
           animation: rotate3d 8s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+          .arcade-button {
+            width: 120px;
+            height: 120px;
+          }
         }
 
         @keyframes rotate3d {
@@ -215,13 +222,15 @@ export default function AppsPage() {
           transition: background 0.3s ease;
         }
 
-        .pink-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #FFFFFF,
-            #E5E5E5 50%,
-            #CCCCCC
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .pink-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #FFFFFF,
+              #E5E5E5 50%,
+              #CCCCCC
+            );
+          }
         }
 
         /* Blue button */
@@ -238,13 +247,15 @@ export default function AppsPage() {
           transition: background 0.3s ease;
         }
 
-        .blue-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #FF6B6B,
-            #E74C3C 50%,
-            #C0392B
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .blue-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #FF6B6B,
+              #E74C3C 50%,
+              #C0392B
+            );
+          }
         }
 
         /* Green button */
@@ -261,13 +272,15 @@ export default function AppsPage() {
           transition: background 0.3s ease;
         }
 
-        .green-button:hover::after {
-          background: radial-gradient(
-            circle at 40% 35%,
-            #D2691E,
-            #8B4513 50%,
-            #654321
-          );
+        @media (hover: hover) and (pointer: fine) {
+          .green-button:hover::after {
+            background: radial-gradient(
+              circle at 40% 35%,
+              #D2691E,
+              #8B4513 50%,
+              #654321
+            );
+          }
         }
       `}</style>
     </div>
