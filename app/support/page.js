@@ -63,7 +63,7 @@ export default function SupportPage() {
           </div>
 
           {/* Support Tiers */}
-          <div className={`grid grid-cols-2 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto md:grid-cols-5`}>
+          <div className={`grid grid-cols-3 gap-4 md:gap-8 mb-12 max-w-5xl mx-auto md:grid-cols-5`}>
             {supportTiers
               .filter(tier => {
                 if (tier.monthlyOnly && paymentType !== 'monthly') return false
@@ -79,9 +79,9 @@ export default function SupportPage() {
                   <span className="amount-text">${tier.amount}</span>
                 </button>
                 {tier.isSponsor && (
-                  <div className="mt-3 text-center">
-                    <p className="text-xs font-bold text-gray-800 mb-1">SPONSOR</p>
-                    <p className="text-xs text-gray-600 px-2">YouTube credits</p>
+                  <div className="mt-2 md:mt-3 text-center">
+                    <p className="text-[0.6rem] md:text-xs font-bold text-gray-800 mb-0.5 md:mb-1">SPONSOR</p>
+                    <p className="text-[0.55rem] md:text-xs text-gray-600 px-2 hidden md:block">YouTube credits</p>
                   </div>
                 )}
               </div>
@@ -127,8 +127,8 @@ export default function SupportPage() {
 
         /* Support button style - 3D sphere like NoiseFace */
         .support-button {
-          width: 140px;
-          height: 140px;
+          width: 70px;
+          height: 70px;
           border-radius: 50%;
           position: relative;
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -187,7 +187,7 @@ export default function SupportPage() {
         .amount-text {
           position: relative;
           z-index: 3;
-          font-size: 1.5rem;
+          font-size: 0.875rem;
           font-weight: bold;
           color: black;
           font-family: 'Courier New', monospace;
