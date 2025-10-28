@@ -12,7 +12,7 @@ export default function SupportPage() {
     { amount: 10, color: 'blue', stripeOneTime: 'https://buy.stripe.com/aFabJ0fTZg6OeKL3GM5ZC04', stripeMonthly: 'https://buy.stripe.com/eVq7sK7ntf2K5ab2CI5ZC08', isSponsor: false },
     { amount: 20, color: 'green', stripeOneTime: 'https://buy.stripe.com/14A9AS7ntaMu6effpu5ZC07', stripeMonthly: 'https://buy.stripe.com/00waEW8rx2fY9qr9165ZC09', isSponsor: false },
     { amount: 50, color: 'purple', stripeOneTime: 'https://buy.stripe.com/fZu7sK239bQygST3GM5ZC06', stripeMonthly: 'https://buy.stripe.com/7sY3cu4bhg6O1XZdhm5ZC0a', isSponsor: false },
-    { amount: 200, color: 'black', stripeOneTime: '', stripeMonthly: 'https://buy.stripe.com/3cI14mfTZ9Iq0TV9165ZC0b', isSponsor: true, monthlyOnly: true },
+    { amount: 200, color: 'gold', stripeOneTime: '', stripeMonthly: 'https://buy.stripe.com/3cI14mfTZ9Iq0TV9165ZC0b', isSponsor: true, monthlyOnly: true },
   ]
 
   const handleSupport = (tier) => {
@@ -35,7 +35,7 @@ export default function SupportPage() {
           </h1>
 
           <p className="text-base md:text-lg text-gray-700 mb-12 max-w-2xl mx-auto px-4">
-            It's because of humanoids like yourself that I can continue to do what I do! ❤️
+            It's because of humanoids like yourself that I can continue to do what I do!
           </p>
 
           {/* Payment Type Toggle */}
@@ -101,7 +101,7 @@ export default function SupportPage() {
 
           {/* Supporters Section */}
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">♥️ OUR MONTHLY SUPPORTERS</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">MONTHLY SUPPORTERS ♥️</h2>
             <div className="text-center text-lg md:text-xl leading-relaxed text-gray-800">
               {['rogier maurer', 'Adam', 'Nuna', 'Steve Dawson', 'Sean Conover', 'Arianna Davis', 'Adam Ramadan', 'Herbal7ea', 'PaulDuran', 'Chris Samuel', 'Michael H', 'Nyyym', 'Juju Bullseye', 'Topher Graceless', 'Shah Paul', 'NoiseTheorem', 'tony', 'Jean-David Palmer', 'David Maskew', 'Jake Cadigal', 'Stevie (OneManWent)', 'Rachel K Collier', 'Edith Frost', 'Christopher Gerardy', 'David Goldstein', 'Nolan McFadden', 'orange88us', 'Jeff', 'Drew from Westchester', 'James Gregory', 'Tonverfall Studio', 'ezbot', 'Yakov Khalinsky', 'larry', 'Pnya Pnya', 'Geo (Overand)', 'Kevin Marks', 'Justin Benjamin', 'John Sudnik', 'Silvia', 'Joshua A.C. Newman', 'Dan Kushner', 'Colin Brash'].join(' • ')}
             </div>
@@ -248,26 +248,26 @@ export default function SupportPage() {
           color: white;
         }
 
-        /* Black sponsor button */
-        .black-support.monthly-mode::after {
+        /* Gold sponsor button */
+        .gold-support.monthly-mode::after {
           background: radial-gradient(
             circle at 40% 35%,
-            #2a2a2a,
-            #1a1a1a 50%,
-            #000000
+            #FFD700,
+            #FFC700 50%,
+            #DAA520
           );
         }
 
-        .black-support.monthly-mode .amount-text {
-          color: white;
+        .gold-support.monthly-mode .amount-text {
+          color: black;
         }
 
-        .black-support.monthly-mode:hover::after {
+        .gold-support.monthly-mode:hover::after {
           background: radial-gradient(
             circle at 40% 35%,
-            #1a1a1a,
-            #0a0a0a 50%,
-            #000000
+            #FFED4E,
+            #FFD700 50%,
+            #FFC700
           );
         }
       `}</style>
