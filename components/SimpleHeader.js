@@ -20,11 +20,11 @@ export default function SimpleHeader() {
             <span className="hidden md:inline">JAde Wii</span>
           </Link>
           <div className="flex items-center space-x-6">
-            <Link href="/albums" className="hover:text-gray-600">
-              ALBUMS
-            </Link>
             <Link href="/apps" className="hover:text-gray-600">
               APPS
+            </Link>
+            <Link href="/albums" className="hover:text-gray-600">
+              ALBUMS
             </Link>
             <Link href="/support" className="hover:text-gray-600">
               DONATE

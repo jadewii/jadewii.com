@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-blue-50">
       <div className="container-custom py-16 md:py-24">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center flex flex-col">
 
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
@@ -32,9 +32,9 @@ export default function HomePage() {
           </div>
 
           {/* Support Button */}
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center order-2 md:order-1">
             <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
-              Support My Work
+              Donate
             </Link>
             <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
               Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
@@ -102,7 +102,7 @@ export default function HomePage() {
           </div>
 
           {/* App Store Button */}
-          <div className="mt-12 mb-8 text-center">
+          <div className="mt-12 mb-8 text-center order-1 md:order-2">
             <a
               href="https://apps.apple.com/us/app/noiseface/id6754266069"
               target="_blank"

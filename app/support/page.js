@@ -29,21 +29,9 @@ export default function SupportPage() {
       <div className="container-custom py-16 md:py-24">
         <div className="max-w-4xl mx-auto text-center">
 
-          {/* Profile Image */}
-          <div className="flex justify-center mb-8">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl">
-              <Image
-                src="/images/jade-profile.jpg"
-                alt="JAde Wii"
-                fill
-                className="object-cover"
-              />
-            </div>
-          </div>
-
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black animate-fade-in">
-            DONATE
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-black animate-fade-in">
+            ❤️ DONATE
           </h1>
 
           <p className="text-base md:text-lg text-gray-700 mb-12 max-w-2xl mx-auto px-4">

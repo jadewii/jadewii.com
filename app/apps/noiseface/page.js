@@ -34,7 +34,7 @@ export default function AppsPage() {
           {/* Support Button */}
           <div className="mb-12 text-center order-2 md:order-1">
             <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
-              Support My Work
+              Donate
             </Link>
             <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
               Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
