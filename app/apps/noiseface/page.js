@@ -30,6 +30,24 @@ export default function AppsPage() {
             </div>
           </div>
 
+          {/* Support Button */}
+          <div className="mb-12 text-center">
+            <a
+              href="https://www.patreon.com/cw/jadewii/membership"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
+              </svg>
+              Support My Work
+            </a>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
+              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
+            </p>
+          </div>
+
           {/* Features Grid */}
           <div className="max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
@@ -91,7 +109,7 @@ export default function AppsPage() {
           </div>
 
           {/* App Store Button */}
-          <div className="mt-12 text-center">
+          <div className="mt-12 mb-8 text-center">
             <a
               href="https://apps.apple.com/us/app/noiseface/id6754266069"
               target="_blank"
@@ -106,24 +124,6 @@ export default function AppsPage() {
                 className="drop-shadow-md"
               />
             </a>
-          </div>
-
-          {/* Patreon Support Button */}
-          <div className="mt-12 mb-8 text-center">
-            <a
-              href="https://www.patreon.com/cw/jadewii/membership"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-              </svg>
-              Support on Patreon
-            </a>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
-              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
-            </p>
           </div>
 
         </div>
