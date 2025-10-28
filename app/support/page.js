@@ -7,7 +7,7 @@ export default function SupportPage() {
   const [paymentType, setPaymentType] = useState('one-time') // 'one-time' or 'monthly'
 
   const supportTiers = [
-    { amount: 2, color: 'white', stripeOneTime: '', stripeMonthly: '', isSponsor: false, oneTimeOnly: true },
+    { amount: 2, color: 'white', stripeOneTime: 'https://donate.stripe.com/28EdR8cHN3k27ij7X25ZC0c', stripeMonthly: '', isSponsor: false, oneTimeOnly: true },
     { amount: 5, color: 'pink', stripeOneTime: 'https://buy.stripe.com/00w9ASfTZ1bUbyz9165ZC02', stripeMonthly: 'https://buy.stripe.com/fZu3cu5fl6wedGH3GM5ZC03', isSponsor: false },
     { amount: 10, color: 'blue', stripeOneTime: 'https://buy.stripe.com/aFabJ0fTZg6OeKL3GM5ZC04', stripeMonthly: 'https://buy.stripe.com/eVq7sK7ntf2K5ab2CI5ZC08', isSponsor: false },
     { amount: 20, color: 'green', stripeOneTime: 'https://buy.stripe.com/14A9AS7ntaMu6effpu5ZC07', stripeMonthly: 'https://buy.stripe.com/00waEW8rx2fY9qr9165ZC09', isSponsor: false },
@@ -113,7 +113,7 @@ export default function SupportPage() {
 
           {/* Supporters Section */}
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">💙 THANKS TO OUR MONTHLY SUPPORTERS</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">♥️ OUR MONTHLY SUPPORTERS</h2>
             <div className="text-center text-lg md:text-xl leading-relaxed text-gray-800">
               {['rogier maurer', 'Adam', 'Nuna', 'Steve Dawson', 'Sean Conover', 'Arianna Davis', 'Adam Ramadan', 'Herbal7ea', 'PaulDuran', 'Chris Samuel', 'Michael H', 'Nyyym', 'Juju Bullseye', 'Topher Graceless', 'Shah Paul', 'NoiseTheorem', 'tony', 'Jean-David Palmer', 'David Maskew', 'Jake Cadigal', 'Stevie (OneManWent)', 'Rachel K Collier', 'Edith Frost', 'Christopher Gerardy', 'David Goldstein', 'Nolan McFadden', 'orange88us', 'Jeff', 'Drew from Westchester', 'James Gregory', 'Tonverfall Studio', 'ezbot', 'Yakov Khalinsky', 'larry', 'Pnya Pnya', 'Geo (Overand)', 'Kevin Marks', 'Justin Benjamin', 'John Sudnik', 'Silvia', 'Joshua A.C. Newman', 'Dan Kushner', 'Colin Brash'].join(' • ')}
             </div>
