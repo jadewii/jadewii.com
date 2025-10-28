@@ -100,21 +100,16 @@ export default function AppsPage() {
             ))}
           </div>
 
-          {/* Patreon Support Button */}
+          {/* Support Button */}
           <div className="mt-12 md:mt-16 text-center px-4">
-            <a
-              href="https://www.patreon.com/cw/jadewii/membership"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/support"
               className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-lg font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-              </svg>
-              Support on Patreon
-            </a>
+              Support My Work
+            </Link>
             <p className="text-gray-600 text-base mt-4 max-w-md mx-auto px-4">
-              Your support on Patreon helps me keep creating and sharing my work with the world.
+              Your support helps me keep creating and sharing my work with the world.
             </p>
           </div>
 

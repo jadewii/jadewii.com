@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function AppsPage() {
   return (
@@ -32,19 +33,11 @@ export default function AppsPage() {
 
           {/* Support Button */}
           <div className="mb-12 text-center">
-            <a
-              href="https://www.patreon.com/cw/jadewii/membership"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524M.003 23.537h4.22V.524H.003"/>
-              </svg>
+            <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
               Support My Work
-            </a>
+            </Link>
             <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
-              Like what I do? Support me on Patreon so I can keep creating and sharing my work with the world ❤️
+              Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
             </p>
           </div>
 
