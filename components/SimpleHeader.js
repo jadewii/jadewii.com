@@ -20,6 +20,9 @@ export default function SimpleHeader() {
             <span className="hidden md:inline">JAde Wii</span>
           </Link>
           <div className="flex items-center space-x-6">
+            <Link href="/" className="hover:text-gray-600">
+              HOME
+            </Link>
             <Link href="/apps" className="hover:text-gray-600">
               APPS
             </Link>

@@ -49,16 +49,6 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Support Button */}
-          <div className="mt-12 mb-12 text-center">
-            <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
-              Donate
-            </Link>
-            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
-              Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
-            </p>
-          </div>
-
           {/* Features Grid */}
           <div className="max-w-3xl mx-auto mb-12">
             <h2 className="text-2xl font-bold mb-8 text-gray-800">Features</h2>
@@ -91,7 +81,7 @@ export default function HomePage() {
                 ⚡ Real-time Audio
               </span>
               <span className="px-4 py-2 bg-white border-2 border-purple-200 text-gray-700 rounded-full text-sm font-medium shadow-sm">
-                🎧 High Quality
+                🎧 Studio Quality
               </span>
             </div>
           </div>
@@ -116,6 +106,16 @@ export default function HomePage() {
 
             <p className="text-sm text-gray-600">
               Available for iPhone & iPad.
+            </p>
+          </div>
+
+          {/* Support Button */}
+          <div className="mt-12 mb-12 text-center">
+            <Link href="/support" className="inline-flex items-center gap-3 px-6 py-3 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg">
+              Donate
+            </Link>
+            <p className="text-gray-600 text-sm mt-4 max-w-md mx-auto px-4">
+              Like what I do? Your support helps me keep creating and sharing my work with the world ❤️
             </p>
           </div>
 
