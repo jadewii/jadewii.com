@@ -47,37 +47,51 @@ export default function AppsPage() {
             </p>
           </div>
 
+          {/* Featured Released Apps */}
+          <div className="mb-16 px-4">
+            {apps.filter(app => app.available).map((app) => (
+              <Link
+                key={app.id}
+                href={app.link}
+                className="block max-w-sm mx-auto group"
+              >
+                <div className="relative mb-4">
+                  <div className="app-cover aspect-square rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                      src={app.icon}
+                      alt={app.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  {/* NEW Badge */}
+                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse z-10">
+                    NEW!
+                  </div>
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 group-hover:text-purple-600 transition-colors">
+                  {app.name}
+                </h2>
+                <p className="text-center text-gray-600 text-sm">Tap to learn more</p>
+              </Link>
+            ))}
+          </div>
+
+          {/* Coming Soon Section */}
+          <div className="mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-700">
+              Coming Soon
+            </h2>
+          </div>
+
           {/* Sticker Book Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto px-4 md:px-0">
-            {apps.map((app) => (
+            {apps.filter(app => !app.available).map((app) => (
               <div
                 key={app.id}
                 className="sticker-slot"
               >
-                {app.available ? (
-                  // Available app - clickable
-                  <Link href={app.link} className="block">
-                    <div className="relative">
-                      <div className="sticker-card available aspect-square">
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={app.icon}
-                            alt={app.name}
-                            fill
-                            className="object-cover rounded-3xl"
-                          />
-                        </div>
-                      </div>
-                      {/* NEW Badge */}
-                      <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
-                        NEW!
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-lg md:text-xl text-center mt-3">
-                      {app.name}
-                    </h3>
-                  </Link>
-                ) : app.name ? (
+                {app.name ? (
                   // Coming soon app with no icon
                   <div>
                     <div className="sticker-card coming-soon aspect-square">
@@ -122,6 +136,25 @@ export default function AppsPage() {
       </div>
 
       <style jsx>{`
+        .app-cover {
+          position: relative;
+          width: 100%;
+          max-width: 280px;
+          margin: 0 auto;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+          .app-cover {
+            max-width: 400px;
+          }
+        }
+
+        .app-cover:hover {
+          transform: scale(1.02);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
         .sticker-slot {
           position: relative;
         }
