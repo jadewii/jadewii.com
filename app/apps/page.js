@@ -87,7 +87,7 @@ export default function AppsPage() {
                             src={app.icon}
                             alt={app.name}
                             fill
-                            className="object-cover rounded-3xl"
+                            className="object-cover rounded-3xl scale-105"
                           />
                         </div>
                       ) : (
