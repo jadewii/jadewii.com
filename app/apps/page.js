@@ -80,7 +80,7 @@ export default function AppsPage() {
                 ) : app.name ? (
                   // Coming soon app
                   <div>
-                    <div className="sticker-card coming-soon aspect-square">
+                    <div className={`sticker-card ${app.icon ? 'available' : 'coming-soon'} aspect-square`}>
                       {app.icon ? (
                         <div className="relative w-full h-full">
                           <Image
