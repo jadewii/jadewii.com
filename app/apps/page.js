@@ -15,7 +15,7 @@ export default function AppsPage() {
     {
       id: 'waveface',
       name: 'Up Next...',
-      icon: null,
+      icon: '/images/apps/modularradioicon.png',
       available: false,
       link: null
     },
@@ -78,12 +78,23 @@ export default function AppsPage() {
                     </h3>
                   </Link>
                 ) : app.name ? (
-                  // Coming soon app with no icon
+                  // Coming soon app
                   <div>
                     <div className="sticker-card coming-soon aspect-square">
-                      <div className="flex items-center justify-center h-full">
-                        <div className="text-6xl text-gray-400">?</div>
-                      </div>
+                      {app.icon ? (
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={app.icon}
+                            alt={app.name}
+                            fill
+                            className="object-cover rounded-3xl"
+                          />
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <div className="text-6xl text-gray-400">?</div>
+                        </div>
+                      )}
                     </div>
                     <h3 className="font-bold text-lg md:text-xl text-center text-gray-500 mt-3">
                       {app.name}
