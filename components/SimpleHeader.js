@@ -27,7 +27,13 @@ export default function SimpleHeader() {
               APPS
             </Link>
             <Link href="/albums" className="hover:text-gray-600">
-              ALBUMS
+              MUSIC
+            </Link>
+            <Link href="/sample-packs" className="hover:text-gray-600">
+              SOUNDS
+            </Link>
+            <Link href="/patches" className="hover:text-gray-600">
+              PATCHES
             </Link>
             <Link href="/support" className="hover:text-gray-600">
               DONATE

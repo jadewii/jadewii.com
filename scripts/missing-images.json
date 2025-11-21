@@ -1,0 +1,50 @@
+[
+  {
+    "product": "Tongue Drum",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "OP-1 Field Tape No. 1",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "Glitch Drum",
+    "expectedPath": "/images/sample-packs/placeholder.png"
+  },
+  {
+    "product": "Fat Buddha Lofi Drums",
+    "expectedPath": "/images/sample-packs/placeholder.png"
+  },
+  {
+    "product": "MU-16 Synth",
+    "expectedPath": "/images/sample-packs/placeholder.png"
+  },
+  {
+    "product": "Ambient Chords",
+    "expectedPath": "/images/sample-packs/placeholder.png"
+  },
+  {
+    "product": "Mini Keys Collection",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "SP-404 MKII",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "Modular Synth Vol. 3",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "SP-404 OG",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "Modular Synth Vol. 2",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  },
+  {
+    "product": "Modular Synth Vol. 1",
+    "expectedPath": "/images/albums/placeholder.jpg"
+  }
+]

@@ -1,0 +1,44 @@
+
+// Add these sample packs to lib/data/samplePacks.js
+// Append to the samplePacks array:
+
+  {
+    "id": "glitch-drum",
+    "title": "Glitch Drum",
+    "artist": "JAde Wii",
+    "price": 20,
+    "type": "sample-pack",
+    "category": "drums-kits",
+    "image": "/images/sample-packs/placeholder.png",
+    "itchioUrl": ""
+  },
+  {
+    "id": "fat-buddha-lofi-drums",
+    "title": "Fat Buddha Lofi Drums",
+    "artist": "JAde Wii",
+    "price": 20,
+    "type": "sample-pack",
+    "category": "drums-kits",
+    "image": "/images/sample-packs/placeholder.png",
+    "itchioUrl": ""
+  },
+  {
+    "id": "mu-16-synth",
+    "title": "MU-16 Synth",
+    "artist": "JAde Wii",
+    "price": 10,
+    "type": "sample-pack",
+    "category": "sampled-instruments",
+    "image": "/images/sample-packs/placeholder.png",
+    "itchioUrl": ""
+  },
+  {
+    "id": "ambient-chords",
+    "title": "Ambient Chords",
+    "artist": "JAde Wii",
+    "price": 15,
+    "type": "sample-pack",
+    "category": "sampled-instruments",
+    "image": "/images/sample-packs/placeholder.png",
+    "itchioUrl": ""
+  }

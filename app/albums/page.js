@@ -5,9 +5,8 @@ import SimpleProductCard from '../../components/SimpleProductCard'
 import { products } from '../../lib/data/products'
 
 export default function AlbumsPage() {
-  const albums = products.filter(p => p.type === 'album' && p.itchioUrl)
+  const albums = products.filter(p => p.type === 'album' && !p.hidden)
   const mixtapes = albums.filter(p => p.category === 'mixtapes')
-  const modular = albums.filter(p => p.category === 'modular')
 
   return (
     <div className="container-custom py-8">
@@ -16,13 +15,12 @@ export default function AlbumsPage() {
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">The absolute best way to support me as an independent artist.</p>
       </div>
 
-
-      {/* MODULAR Section */}
-      {modular.length > 0 && (
+      {/* MIXTAPES Section */}
+      {mixtapes.length > 0 && (
         <>
-          <h2 className="text-xl font-bold mb-6">MODULAR</h2>
+          <h2 className="text-xl font-bold mb-6">MIXTAPES</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
-            {modular.map((product) => (
+            {mixtapes.map((product) => (
               <SimpleProductCard key={product.id} product={product} />
             ))}
           </div>

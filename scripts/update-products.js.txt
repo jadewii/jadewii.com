@@ -1,0 +1,116 @@
+
+// Add these albums to lib/data/products.js
+// Append to the products array:
+
+  {
+    "id": "tongue-drum",
+    "title": "Tongue Drum",
+    "artist": "JAde Wii",
+    "price": 20,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/placeholder.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Tongue Drum.zip"
+  },
+  {
+    "id": "remedies-granted-through-dreams",
+    "title": "Remedies Granted Through Dreams",
+    "artist": "JAde Wii",
+    "price": 15,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/remedies-granted-through-dreams.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Remedies Granted Through Dreams.zip"
+  },
+  {
+    "id": "enlightened-ape",
+    "title": "Enlightened Ape",
+    "artist": "JAde Wii",
+    "price": 15,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/enlightened-ape.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Enlightened Ape.zip"
+  },
+  {
+    "id": "op-1-field-tape-no-1",
+    "title": "OP-1 Field Tape No. 1",
+    "artist": "JAde Wii",
+    "price": 10,
+    "type": "album",
+    "category": "electronic",
+    "image": "/images/albums/placeholder.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "electronic/JAde Wii - OP-1 Field Tape No. 1.zip"
+  },
+  {
+    "id": "above-the-quadi",
+    "title": "Above the Quadi",
+    "artist": "JAde Wii",
+    "price": 15,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/above-the-quadi.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Above the Quadi.zip"
+  },
+  {
+    "id": "beneath-the-bohdi",
+    "title": "Beneath the Bohdi",
+    "artist": "JAde Wii",
+    "price": 15,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/beneath-the-bohdi.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Beneath the Bohdi.zip"
+  },
+  {
+    "id": "wabi-sabi",
+    "title": "Wabi Sabi",
+    "artist": "JAde Wii",
+    "price": 20,
+    "type": "album",
+    "category": "modular",
+    "image": "/images/albums/wabi-sabi.jpg",
+    "itchioUrl": "",
+    "trackList": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ],
+    "downloadFile": "modular/JAde Wii - Wabi Sabi.zip"
+  }

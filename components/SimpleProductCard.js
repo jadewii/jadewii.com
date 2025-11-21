@@ -5,10 +5,11 @@ import { useState, useRef, useEffect } from 'react'
 // Global variable to track currently playing audio
 let currentlyPlaying = null
 
-export default function SimpleProductCard({ product }) {
+export default function SimpleProductCard({ product, showTransportControls = true }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [showControls, setShowControls] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [isImageHovered, setIsImageHovered] = useState(false)
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0)
   const [leftButtonPressed, setLeftButtonPressed] = useState(false)
   const [rightButtonPressed, setRightButtonPressed] = useState(false)
@@ -138,7 +139,12 @@ export default function SimpleProductCard({ product }) {
       }}
     >
       {/* Album Cover */}
-      <div className="aspect-square relative overflow-hidden bg-gray-100">
+      <div
+        className="aspect-square relative overflow-hidden bg-gray-100 cursor-pointer"
+        onClick={handleBuyNow}
+        onMouseEnter={() => setIsImageHovered(true)}
+        onMouseLeave={() => setIsImageHovered(false)}
+      >
         {/* Main image */}
         <img
           src={product.image || '/placeholder.jpg'}
@@ -161,8 +167,8 @@ export default function SimpleProductCard({ product }) {
           />
         )}
 
-        {/* Hover Controls - Only show for albums, not sample packs */}
-        {showControls && product.type === 'album' && (
+        {/* Hover Controls - Only show for albums when transport controls enabled */}
+        {showControls && product.type === 'album' && showTransportControls && (
           <div className="absolute inset-0 flex items-center justify-center">
             {/* Previous Track Button - Circle with Arrow */}
             {tracks.length > 1 && (
@@ -242,7 +248,11 @@ export default function SimpleProductCard({ product }) {
       {/* Buy Button Bar - Below Album Art */}
       <button
         onClick={handleBuyNow}
-        className="w-full py-2 text-xs font-semibold bg-gray-100 text-black hover:bg-gray-800 hover:text-white transition-colors"
+        className={`w-full py-2 text-xs font-semibold transition-colors ${
+          isImageHovered
+            ? 'bg-gray-800 text-white'
+            : 'bg-gray-100 text-black hover:bg-gray-800 hover:text-white'
+        }`}
       >
         BUY +
       </button>
