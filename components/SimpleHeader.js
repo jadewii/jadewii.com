@@ -30,7 +30,7 @@ export default function SimpleHeader() {
               MUSIC
             </Link>
             <Link href="/sample-packs" className="hover:text-gray-600">
-              SOUNDS
+              PACKS
             </Link>
             <Link href="/patches" className="hover:text-gray-600">
               PATCHES
