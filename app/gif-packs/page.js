@@ -1,7 +1,7 @@
 'use client'
 
-import SimpleProductCard from '../../../components/SimpleProductCard'
-import { gifPacks } from '../../../lib/data/gifPacks'
+import SimpleProductCard from '../../components/SimpleProductCard'
+import { gifPacks } from '../../lib/data/gifPacks'
 
 export default function GifPacksPage() {
   const visualAssets = gifPacks.filter(p => p.category === 'visual-assets')
