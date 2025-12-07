@@ -8,25 +8,17 @@ export default function AppsPage() {
     {
       id: 'noiseface',
       name: 'NoiseFace',
-      icon: '/images/apps/noiseface-icon.png',
+      icon: '/images/apps/noiseface-icon.webp',
       available: true,
       link: '/apps/noiseface'
     },
     {
       id: 'waveface',
-      name: 'Up Next...',
-      icon: '/images/apps/modularradioicon.png',
+      name: 'WaveFace',
+      icon: '/images/apps/waveface-icon.webp',
       available: false,
       link: null
-    },
-    // Empty slots for future apps
-    ...Array(6).fill(null).map((_, i) => ({
-      id: `slot-${i + 3}`,
-      name: null,
-      icon: null,
-      available: false,
-      link: null
-    }))
+    }
   ]
 
   return (
@@ -47,8 +39,8 @@ export default function AppsPage() {
             </p>
           </div>
 
-          {/* Sticker Book Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto px-4 md:px-0">
+          {/* App Cards */}
+          <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-xl mx-auto px-4 md:px-0">
             {apps.map((app) => (
               <div
                 key={app.id}

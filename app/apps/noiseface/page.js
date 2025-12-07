@@ -22,7 +22,7 @@ export default function AppsPage() {
           <div className="flex justify-center mb-12">
             <div className="relative w-36 h-36 md:w-96 md:h-96 animate-float">
               <Image
-                src="/images/apps/noiseface-hero.png"
+                src="/images/apps/noiseface-hero.webp"
                 alt="NoiseFace Character"
                 fill
                 className="object-contain drop-shadow-2xl"
@@ -96,7 +96,7 @@ export default function AppsPage() {
             <div className="flex justify-center mb-6">
               <div className="relative w-56 h-56 bg-white p-4 rounded-2xl shadow-lg">
                 <Image
-                  src="/images/apps/qr-code.jpg"
+                  src="/images/apps/qr-code.webp"
                   alt="Download QR Code"
                   fill
                   className="object-contain p-3"
