@@ -27,7 +27,7 @@ export default function MusicPage() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full px-8 py-4 bg-white border-2 border-gray-200 rounded-full text-xl font-bold text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition-all transform hover:scale-105 shadow-sm"
+                  className="block w-full px-8 py-4 bg-white border-2 border-gray-200 rounded-full text-xl font-bold text-gray-800 hover:bg-black hover:text-white hover:border-black transition-all transform hover:scale-105 shadow-sm"
                 >
                   {link.name}
                 </a>
@@ -35,7 +35,7 @@ export default function MusicPage() {
                 <Link
                   key={link.name}
                   href={link.url}
-                  className="block w-full px-8 py-4 bg-white border-2 border-gray-200 rounded-full text-xl font-bold text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition-all transform hover:scale-105 shadow-sm"
+                  className="block w-full px-8 py-4 bg-white border-2 border-gray-200 rounded-full text-xl font-bold text-gray-800 hover:bg-black hover:text-white hover:border-black transition-all transform hover:scale-105 shadow-sm"
                 >
                   {link.name}
                 </Link>

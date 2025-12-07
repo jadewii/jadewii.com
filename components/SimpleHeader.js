@@ -26,7 +26,7 @@ export default function SimpleHeader() {
             <Link href="/apps" className="hover:text-gray-600">
               APPS
             </Link>
-            <Link href="/albums" className="hover:text-gray-600">
+            <Link href="/music" className="hover:text-gray-600">
               MUSIC
             </Link>
             <Link href="/sample-packs" className="hover:text-gray-600">
