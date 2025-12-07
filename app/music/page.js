@@ -4,11 +4,10 @@ import Link from 'next/link'
 
 export default function MusicPage() {
   const streamingLinks = [
-    { name: 'Spotify', url: 'https://spoti.fi/40dcYju', external: true },
-    { name: 'Apple Music', url: 'https://apple.co/40drqXx', external: true },
-    { name: 'YouTube Music', url: 'https://bit.ly/3BWcODv', external: true },
-    { name: 'Amazon Music', url: 'https://amzn.to/3W0Q8sQ', external: true },
-    { name: 'Bandcamp', url: 'https://bit.ly/3DIR7Hx', external: true },
+    { name: 'Spotify', url: 'https://open.spotify.com/artist/5LpHMa6ly1rZjlQ30LQhw2', external: true },
+    { name: 'Apple Music', url: 'https://music.apple.com/us/artist/jade-wii/1450705869', external: true },
+    { name: 'YouTube Music', url: 'https://music.youtube.com/browse/MPADUCOvW40W5-DK04izugvu6ubA', external: true },
+    { name: 'Amazon Music', url: 'https://music.amazon.com/artists/B07N4JQGGV/jade-wii', external: true },
     { name: 'Digital Albums', url: '/albums', external: false },
   ]
 
