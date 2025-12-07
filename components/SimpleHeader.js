@@ -35,9 +35,9 @@ export default function SimpleHeader() {
             <Link href="/patches" className="hover:text-gray-600">
               PATCHES
             </Link>
-            <Link href="/support" className="hover:text-gray-600">
+            <a href="https://www.patreon.com/c/jadewii/membership" target="_blank" rel="noopener noreferrer" className="hover:text-gray-600">
               DONATE
-            </Link>
+            </a>
             <a
               href="https://www.youtube.com/@JAdeWii_"
               target="_blank"
