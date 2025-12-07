@@ -18,7 +18,7 @@ export default function MusicPage() {
         <div className="max-w-2xl mx-auto text-center">
           {/* Portrait */}
           <div className="flex justify-center mb-2">
-            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-4 border-white shadow-xl">
+            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white shadow-xl">
               <Image
                 src="/images/jadewii.webp"
                 alt="JAde Wii"
