@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function AppsPage() {
   const apps = [
@@ -9,15 +8,13 @@ export default function AppsPage() {
       id: 'noiseface',
       name: 'NoiseFace',
       icon: '/images/apps/noiseface-icon.webp',
-      available: true,
-      link: '/apps/noiseface'
+      link: 'https://apps.apple.com/us/app/noiseface/id6754266069'
     },
     {
       id: 'waveface',
       name: 'WaveFace',
       icon: '/images/apps/waveface-icon.webp',
-      available: false,
-      link: null
+      link: 'https://apps.apple.com/us/app/waveface/id6754204480'
     }
   ]
 
@@ -42,63 +39,22 @@ export default function AppsPage() {
           {/* App Cards */}
           <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-xl mx-auto px-4 md:px-0">
             {apps.map((app) => (
-              <div
-                key={app.id}
-                className="sticker-slot"
-              >
-                {app.available ? (
-                  // Available app - clickable
-                  <Link href={app.link} className="block">
-                    <div className="relative">
-                      <div className="sticker-card available aspect-square">
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={app.icon}
-                            alt={app.name}
-                            fill
-                            className="object-cover rounded-3xl"
-                          />
-                        </div>
-                      </div>
-                      {/* NEW Badge */}
-                      <div className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
-                        NEW!
-                      </div>
-                    </div>
-                    <h3 className="font-bold text-lg md:text-xl text-center mt-3">
-                      {app.name}
-                    </h3>
-                  </Link>
-                ) : app.name ? (
-                  // Coming soon app
-                  <div>
-                    <div className={`sticker-card ${app.icon ? 'available' : 'coming-soon'} aspect-square`}>
-                      {app.icon ? (
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={app.icon}
-                            alt={app.name}
-                            fill
-                            className="object-cover rounded-3xl scale-105"
-                          />
-                        </div>
-                      ) : (
-                        <div className="flex items-center justify-center h-full">
-                          <div className="text-6xl text-gray-400">?</div>
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-bold text-lg md:text-xl text-center text-gray-500 mt-3">
-                      {app.name}
-                    </h3>
-                  </div>
-                ) : (
-                  // Empty slot
-                  <div>
-                    <div className="sticker-card empty aspect-square">
+              <div key={app.id} className="sticker-slot">
+                <a href={app.link} target="_blank" rel="noopener noreferrer" className="block">
+                  <div className="sticker-card available aspect-square">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={app.icon}
+                        alt={app.name}
+                        fill
+                        className="object-cover rounded-3xl"
+                      />
                     </div>
                   </div>
-                )}
+                  <h3 className="font-bold text-lg md:text-xl text-center text-black mt-3">
+                    {app.name}
+                  </h3>
+                </a>
               </div>
             ))}
           </div>
@@ -111,7 +67,7 @@ export default function AppsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-lg font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
             >
-              Support My Work
+              Patreon
             </a>
             <p className="text-gray-600 text-base mt-4 max-w-md mx-auto px-4">
               Your support helps me keep creating and sharing my work with the world.
@@ -143,18 +99,6 @@ export default function AppsPage() {
         .sticker-card.available:hover {
           transform: translateY(-4px) rotate(2deg);
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .sticker-card.coming-soon {
-          background: #FFFFFF;
-          border: 3px dashed #D1D5DB;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          overflow: hidden;
-        }
-
-        .sticker-card.empty {
-          background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
-          border: 3px dashed #E5E7EB;
         }
       `}</style>
     </div>
