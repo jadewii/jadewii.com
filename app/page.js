@@ -20,7 +20,7 @@ export default function HomePage() {
           <div className="flex justify-center mb-6">
             <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-xl">
               <Image
-                src="/images/jade-profile.webp"
+                src="/images/jadewii.webp"
                 alt="JAde Wii"
                 fill
                 className="object-cover"
@@ -63,7 +63,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-lg font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
             >
-              Patreon
+              Donate ❤️
             </a>
             <p className="text-gray-600 text-base mt-4">
               Your support helps me keep creating and sharing my work with the world.
