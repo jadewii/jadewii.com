@@ -21,13 +21,10 @@ export default function SimpleHeader() {
           </Link>
           <div className="flex items-center space-x-6">
             <Link href="/" className="hover:text-gray-600">
-              HOME
+              MUSIC
             </Link>
             <Link href="/apps" className="hover:text-gray-600">
               APPS
-            </Link>
-            <Link href="/music" className="hover:text-gray-600">
-              MUSIC
             </Link>
             <Link href="/sample-packs" className="hover:text-gray-600">
               PACKS

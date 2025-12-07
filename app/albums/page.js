@@ -65,6 +65,21 @@ export default function AlbumsPage() {
             </div>
           </>
         )}
+
+        {/* Donate Button */}
+        <div className="mt-12 mb-12 text-center">
+          <a
+            href="https://www.patreon.com/c/jadewii/membership"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-lg font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
+          >
+            Donate
+          </a>
+          <p className="text-gray-600 text-base mt-4">
+            Your support helps me keep creating and sharing my work with the world.
+          </p>
+        </div>
       </div>
     </div>
   )

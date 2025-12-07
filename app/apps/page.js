@@ -67,7 +67,7 @@ export default function AppsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-lg font-bold rounded-full hover:bg-gray-800 transition-all transform hover:scale-105 shadow-lg"
             >
-              Donate ❤️
+              Donate
             </a>
             <p className="text-gray-600 text-base mt-4 max-w-md mx-auto px-4">
               Your support helps me keep creating and sharing my work with the world.
